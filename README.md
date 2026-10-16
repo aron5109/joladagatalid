@@ -16,4 +16,6 @@ og farðu á <http://localhost:8000>.
 
 ## Birting
 
-Síðan er birt með GitHub Pages af `main`-greininni úr rótarmöppunni (`/`).
+Síðan er birt sjálfkrafa á GitHub Pages með GitHub Actions (`.github/workflows/deploy.yml`) í hvert sinn sem ýtt er á `main`, eins og Jólakexið. Í Settings → Pages þarf *Source* að vera **GitHub Actions**.
+
+Vefslóð: <https://aron5109.github.io/joladagatalid/>
