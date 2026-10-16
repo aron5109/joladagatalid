@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102f29">
+  <title>Jólagleði — jóladagatal starfsfólks</title>
+  <meta name="description" content="Sjónræn frumgerð að stafrænu jóladagatali starfsfólks með 24 gluggum.">
+  <style>
+    :root {
+      --pine: #123a31;
+      --pine-deep: #09241f;
+      --cream: #fff9ed;
+      --paper: #f3ead8;
+      --cranberry: #9d2933;
+      --cranberry-dark: #6f1821;
+      --gold: #e6bd62;
+      --gold-light: #ffe5a3;
+      --ink: #18322b;
+      --muted: #65736d;
+      --shadow: 0 18px 50px rgb(3 21 17 / 22%);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 8%, rgb(239 203 120 / 16%) 0 9%, transparent 25%),
+        radial-gradient(circle at 86% 4%, rgb(171 226 204 / 12%) 0 7%, transparent 23%),
+        linear-gradient(160deg, #17493d 0%, #0c2c26 52%, #071d19 100%);
+      font-family: ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+    :focus-visible { outline: 3px solid var(--gold-light); outline-offset: 4px; }
+
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: -5rem;
+      z-index: 50;
+      padding: .7rem 1rem;
+      border-radius: .6rem;
+      color: var(--pine-deep);
+      background: white;
+      font-weight: 800;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .snow, .snow::before, .snow::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgb(255 255 255 / 55%) 0 1.5px, transparent 2px),
+        radial-gradient(circle, rgb(255 255 255 / 30%) 0 1px, transparent 1.5px);
+      background-size: 110px 110px, 67px 67px;
+      background-position: 0 0, 22px 34px;
+      opacity: .45;
+      content: "";
+    }
+    .snow::before { transform: translate3d(0, -40px, 0); opacity: .4; }
+
+    .site-shell { width: min(1160px, calc(100% - 2rem)); margin: 0 auto; padding: 1rem 0 4rem; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      color: var(--cream);
+      margin-bottom: 1.6rem;
+    }
+    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 850; letter-spacing: .05em; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid rgb(255 255 255 / 28%);
+      border-radius: 50%;
+      background: rgb(255 255 255 / 9%);
+      color: var(--gold-light);
+      font-size: 1.2rem;
+    }
+    .prototype-control { display: flex; gap: .25rem; padding: .3rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; background: rgb(3 19 16 / 30%); }
+    .prototype-control span { align-self: center; padding: 0 .5rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; opacity: .75; }
+    .prototype-control button { min-width: 2.4rem; border: 0; border-radius: 999px; padding: .5rem .7rem; color: var(--cream); background: transparent; cursor: pointer; }
+    .prototype-control button[aria-pressed="true"] { color: var(--pine-deep); background: var(--gold-light); font-weight: 800; }
+
+    .hero {
+      position: relative;
+      padding: 2.4rem 1.2rem 5.2rem;
+      color: var(--cream);
+      text-align: center;
+    }
+    .eyebrow { display: inline-flex; gap: .5rem; align-items: center; margin: 0 0 .75rem; color: var(--gold-light); font-size: .74rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    .eyebrow::before, .eyebrow::after { width: 1.8rem; height: 1px; background: currentColor; content: ""; opacity: .65; }
+    h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 9vw, 5.7rem); font-weight: 500; line-height: .96; letter-spacing: -.045em; }
+    .hero p { max-width: 38rem; margin: 1rem auto 1.5rem; color: rgb(255 249 237 / 78%); font-size: clamp(1rem, 2vw, 1.17rem); line-height: 1.65; }
+    .today-button { display: inline-flex; align-items: center; gap: .7rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; padding: .85rem 1.2rem; color: var(--pine-deep); background: var(--cream); box-shadow: 0 9px 26px rgb(0 0 0 / 18%); font-weight: 850; cursor: pointer; }
+    .today-button:hover { transform: translateY(-2px); }
+
+    .landscape { position: absolute; left: 50%; bottom: -1px; width: min(920px, 100%); height: 5rem; transform: translateX(-50%); overflow: hidden; opacity: .9; }
+    .landscape::before, .landscape::after { position: absolute; bottom: -3rem; width: 22rem; height: 8rem; border-radius: 50%; background: #f1eadb; content: ""; }
+    .landscape::before { left: 8%; transform: rotate(6deg); }
+    .landscape::after { right: 4%; transform: rotate(-8deg); }
+    .village { position: absolute; left: 19%; bottom: .55rem; z-index: 2; width: 3.3rem; height: 2rem; background: var(--cranberry); box-shadow: 4.1rem .2rem 0 #e0b557, 8.2rem -.1rem 0 #647f72, 12.5rem .25rem 0 #a44147; }
+    .village::before { position: absolute; top: -1.25rem; left: -.25rem; border-right: 1.9rem solid transparent; border-bottom: 1.5rem solid var(--cranberry-dark); border-left: 1.9rem solid transparent; content: ""; filter: drop-shadow(4.15rem .2rem 0 #ad832e) drop-shadow(8.3rem -.1rem 0 #405e51) drop-shadow(12.6rem .25rem 0 #75232c); }
+
+    .calendar-card { position: relative; z-index: 3; border: 1px solid rgb(255 255 255 / 55%); border-radius: 2rem; padding: clamp(1rem, 4vw, 2.2rem); background: linear-gradient(145deg, rgb(255 252 245 / 98%), rgb(240 230 210 / 98%)); box-shadow: var(--shadow); }
+    .calendar-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1.6rem; padding: 0 .25rem; }
+    .calendar-head h2 { margin: 0 0 .25rem; font-family: Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 500; }
+    .calendar-head p { margin: 0; color: var(--muted); font-size: .93rem; }
+    .legend { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: flex-end; color: var(--muted); font-size: .75rem; }
+    .legend span { display: inline-flex; align-items: center; gap: .35rem; }
+    .dot { width: .55rem; height: .55rem; border-radius: 50%; background: #d6cdbd; }
+    .dot.open { background: var(--cranberry); }
+    .dot.today { background: var(--gold); box-shadow: 0 0 0 3px rgb(230 189 98 / 28%); }
+
+    .calendar-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; }
+    .door {
+      position: relative;
+      min-width: 0;
+      min-height: 7.5rem;
+      border: 0;
+      border-radius: .9rem;
+      padding: .8rem;
+      overflow: hidden;
+      color: var(--cream);
+      background: var(--door-bg, #315d50);
+      box-shadow: inset 0 0 0 1px rgb(255 255 255 / 12%), 0 3px 0 rgb(50 45 35 / 10%);
+      text-align: left;
+      cursor: pointer;
+      isolation: isolate;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .door:hover:not(.locked) { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 10px 20px rgb(47 37 22 / 16%); }
+    .door::before { position: absolute; inset: 7px; z-index: -1; border: 1px dashed rgb(255 255 255 / 22%); border-radius: .65rem; content: ""; }
+    .door::after { position: absolute; right: -.8rem; bottom: -.9rem; z-index: -2; width: 4.8rem; height: 4.8rem; border-radius: 50%; background: rgb(255 255 255 / 7%); content: ""; }
+    .door:nth-child(6n+1) { --door-bg: #8f2932; }
+    .door:nth-child(6n+2) { --door-bg: #315d50; }
+    .door:nth-child(6n+3) { --door-bg: #b08739; }
+    .door:nth-child(6n+4) { --door-bg: #40506c; }
+    .door:nth-child(6n+5) { --door-bg: #b04c3e; }
+    .door:nth-child(6n) { --door-bg: #477268; }
+    .door .number { display: block; font-family: Georgia, serif; font-size: clamp(2rem, 6vw, 3.15rem); line-height: 1; }
+    .door .date { display: block; margin-top: .35rem; font-size: .69rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; opacity: .75; }
+    .door .status { position: absolute; right: .7rem; top: .65rem; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: rgb(0 0 0 / 17%); font-size: .76rem; }
+    .door.locked { color: #9d9b92; background: #ded7c9; cursor: not-allowed; }
+    .door.locked::before { border-color: rgb(45 55 50 / 12%); }
+    .door.locked .status { color: #6f756f; background: rgb(255 255 255 / 42%); }
+    .door.is-today { box-shadow: 0 0 0 4px var(--gold), 0 10px 26px rgb(131 93 29 / 24%); }
+    .door.is-today::before { border-style: solid; border-color: var(--gold-light); }
+    .today-tag { position: absolute; right: .6rem; bottom: .55rem; padding: .25rem .45rem; border-radius: .35rem; color: var(--pine-deep); background: var(--gold-light); font-size: .63rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .door.special { grid-column: span 3; min-height: 9rem; color: var(--pine-deep); background: linear-gradient(120deg, #f8d981, #fff0ba 42%, #d8a541); box-shadow: inset 0 0 0 1px rgb(117 69 8 / 20%); }
+    .door.special::before { border-color: rgb(116 66 7 / 25%); }
+    .door.special::after { width: 9rem; height: 9rem; background: rgb(255 255 255 / 20%); }
+    .door.special .number { font-size: clamp(3rem, 11vw, 5.5rem); }
+    .door.special .date { color: #705520; }
+    .door.special .special-copy { position: absolute; right: 1.1rem; bottom: 1.2rem; max-width: 10rem; font-family: Georgia, serif; font-size: 1.05rem; text-align: right; }
+    .door.special.locked { color: #6f6346; filter: saturate(.55); }
+
+    .footer { padding: 1.5rem .5rem 0; color: rgb(255 249 237 / 64%); text-align: center; font-size: .78rem; }
+
+    dialog { width: min(34rem, calc(100% - 2rem)); border: 0; border-radius: 1.5rem; padding: 0; color: var(--ink); background: var(--cream); box-shadow: 0 32px 90px rgb(0 0 0 / 48%); }
+    dialog::backdrop { background: rgb(4 24 20 / 70%); backdrop-filter: blur(5px); }
+    .modal-art { position: relative; min-height: 8.5rem; padding: 1.3rem 1.4rem; overflow: hidden; color: white; background: linear-gradient(135deg, var(--cranberry-dark), var(--cranberry)); }
+    .modal-art.gold { color: var(--pine-deep); background: linear-gradient(135deg, #e5b84e, #ffe7a4); }
+    .modal-art::after { position: absolute; right: -2rem; top: -3rem; width: 12rem; height: 12rem; border: 1px solid rgb(255 255 255 / 23%); border-radius: 50%; box-shadow: 0 0 0 1.8rem rgb(255 255 255 / 5%), 0 0 0 3.6rem rgb(255 255 255 / 5%); content: ""; }
+    .modal-number { position: relative; z-index: 1; font-family: Georgia, serif; font-size: 4.6rem; line-height: 1; }
+    .modal-label { position: relative; z-index: 1; display: block; margin-top: .25rem; font-size: .73rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; opacity: .75; }
+    .close-button { position: absolute; right: 1rem; top: 1rem; z-index: 4; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid rgb(255 255 255 / 38%); border-radius: 50%; color: inherit; background: rgb(255 255 255 / 14%); cursor: pointer; }
+    .modal-body { padding: 1.6rem; }
+    .content-type { display: inline-block; margin-bottom: .7rem; color: var(--cranberry); font-size: .72rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .modal-body h3 { margin: 0 0 .8rem; font-family: Georgia, serif; font-size: clamp(1.65rem, 6vw, 2.3rem); font-weight: 500; line-height: 1.1; }
+    .modal-body p { margin: 0; color: #4d5b55; font-size: 1.05rem; line-height: 1.65; }
+    .modal-action { margin-top: 1.25rem; border: 0; border-radius: 999px; padding: .8rem 1rem; color: white; background: var(--pine); font-weight: 800; cursor: pointer; }
+    .answer { margin-top: 1rem !important; padding: 1rem; border-left: 4px solid var(--gold); border-radius: .35rem; background: var(--paper); font-weight: 750; }
+    .hidden { display: none !important; }
+    .locked-dialog .modal-art { color: var(--ink); background: #ded7c9; }
+
+    @media (min-width: 620px) {
+      .site-shell { width: min(1160px, calc(100% - 3rem)); }
+      .calendar-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .85rem; }
+      .door { min-height: 9rem; }
+      .door.special { grid-column: span 4; }
+    }
+    @media (min-width: 900px) {
+      .calendar-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; }
+      .door { min-height: 10.2rem; }
+      .door.special { grid-column: span 6; }
+    }
+    @media (max-width: 620px) {
+      .topbar { align-items: flex-start; }
+      .brand { font-size: .82rem; }
+      .prototype-control { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 1rem; }
+      .prototype-control span { grid-column: 1 / -1; text-align: center; }
+      .prototype-control button { padding: .35rem .5rem; }
+      .calendar-head { align-items: flex-start; flex-direction: column; }
+      .legend { justify-content: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#calendar">Fara beint í dagatalið</a>
+  <div class="snow" aria-hidden="true"></div>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>JÓLAGLEÐI</span></div>
+      <div class="prototype-control" aria-label="Veldu sýnidag frumgerðar">
+        <span>Frumgerð</span>
+        <button type="button" data-demo-day="1" aria-pressed="false">1.</button>
+        <button type="button" data-demo-day="18" aria-pressed="true">18.</button>
+        <button type="button" data-demo-day="24" aria-pressed="false">24.</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Desember 2026</p>
+        <h1 id="page-title">Opnum jólin<br>einn dag í einu</h1>
+        <p>Bak við hvern glugga bíður lítil jólastund fyrir starfsfólkið okkar — speki, gleði, gátur og góðar kveðjur.</p>
+        <button class="today-button" id="open-today" type="button">Opna glugga dagsins <span aria-hidden="true">→</span></button>
+        <div class="landscape" aria-hidden="true"><div class="village"></div></div>
+      </section>
+
+      <section class="calendar-card" id="calendar" aria-labelledby="calendar-title">
+        <div class="calendar-head">
+          <div>
+            <h2 id="calendar-title">Jóladagatalið</h2>
+            <p id="calendar-subtitle">Sýnidagur: 18. desember</p>
+          </div>
+          <div class="legend" aria-label="Skýringar">
+            <span><i class="dot open"></i> Tilbúinn</span>
+            <span><i class="dot today"></i> Í dag</span>
+            <span><i class="dot"></i> Læstur</span>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">Sjónræn frumgerð • Efni og dagsetningar eru til sýnis</footer>
+  </div>
+
+  <dialog id="day-dialog" aria-labelledby="dialog-title">
+    <div class="modal-art" id="modal-art">
+      <button class="close-button" id="close-dialog" type="button" aria-label="Loka glugga">✕</button>
+      <span class="modal-number" id="modal-number"></span>
+      <span class="modal-label" id="modal-date"></span>
+    </div>
+    <div class="modal-body">
+      <span class="content-type" id="content-type"></span>
+      <h3 id="dialog-title"></h3>
+      <p id="dialog-copy"></p>
+      <button class="modal-action hidden" id="modal-action" type="button"></button>
+      <p class="answer hidden" id="answer" role="status"></p>
+    </div>
+  </dialog>
+
+  <script>
+    const content = [
+      { type: "Velkomin", title: "Desember er genginn í garð", copy: "Velkomin í 24 litlar jólastundir. Hér opnum við gleðina einn dag í einu — og byrjum á gömlu góðu: Margar hendur vinna létt verk." },
+      { type: "Fyndin speki", title: "Leyfileg desemberregla", copy: "Það sem ekki klárast fyrir jól getur stundum beðið þar til eftir smákökuna." },
+      { type: "Áskorun dagsins", title: "Lítið takk", copy: "Þakkaðu samstarfsfélaga fyrir eitthvað lítið sem gerði daginn þinn betri. Ein setning er nóg." },
+      { type: "Jólagáta", title: "Hvað felst bak við nálarnar?", copy: "Ég er með nálar en sauma ekki og fæ stundum stjörnu á kollinn. Hvað er ég?", action: "Sýna svar", answer: "Jólatré 🎄" },
+      { type: "Lag dagsins", title: "Smá tónlist í daginn", copy: "Settu uppáhalds jólalagið þitt á og gefðu þér þrjár mínútur til að hlusta. Þú mátt alveg syngja með." },
+      { type: "Jólakveðja", title: "Hlýja úr húsinu", copy: "Gleðilegan desemberdag! Megi kaffið vera heitt, verkefnalistinn hóflegur og samveran góð." },
+      { type: "Gamanspá", title: "Spáin er björt", copy: "Við spáum því að þú finnir góða ástæðu fyrir auka kaffipásu í dag." },
+      { type: "Jólafróðleikur", title: "Vissir þú?", copy: "Jólakort urðu vinsæl á nítjándu öld. Í dag getur hlý kveðja verið jafn einföld og stutt skilaboð til samstarfsfélaga." },
+      { type: "Áskorun dagsins", title: "Tvær mínútur", copy: "Taktu tveggja mínútna pásu frá skjánum, teyðu úr þér og horfðu aðeins út um gluggann — eins og aðstæður leyfa." },
+      { type: "Lukkunúmer", title: "Númer dagsins er 17", copy: "Engin vísindi liggja að baki. Bara dálítið jólaskap og von um sérlega góðan dag." },
+      { type: "Málsháttur", title: "Betra er seint en aldrei", copy: "Sérstaklega þegar kemur að því að segja takk, óska gleðilegra jóla eða taka síðustu smákökuna." },
+      { type: "Jólagáta", title: "Vafið en ekki sár", copy: "Ég er vafinn en er ekki sár, og fólk gleðst oft þegar það opnar mig. Hvað er ég?", action: "Sýna svar", answer: "Jólagjöf 🎁" },
+      { type: "Lag dagsins", title: "Þitt lag, þín stund", copy: "Veldu rólegt jólalag, settu heyrnartólin á og gefðu þér örstutta desemberpásu." },
+      { type: "Fyndin speki", title: "Nestisbokskenningin", copy: "Jólaskapið kemur ekki alltaf í tölvupósti. Stundum kemur það í nestisboxi." },
+      { type: "Gleðiboð", title: "Þú hefur unnið!", copy: "Vinningurinn er rétturinn til að hrósa sjálfri eða sjálfum þér fyrir vikuna. Notist helst strax." },
+      { type: "Áskorun dagsins", title: "Jólavenjan mín", copy: "Deildu góðri jólavenju með samstarfsfélaga ef þig langar. Það má líka bara hlusta." },
+      { type: "Jólafróðleikur", title: "Ljós í myrkrinu", copy: "Vetrarhátíðir víða um heim eiga það sameiginlegt að fagna birtu, samveru og von á dimmasta tíma ársins." },
+      { type: "Kveðja dagsins", title: "Hvar sem þú ert í dag", copy: "Þessi kveðja er til þín — hvort sem þú ert á skrifstofu, á vakt eða í fjarvinnu. Takk fyrir þitt framlag." },
+      { type: "Gamanspá", title: "Óvænt bros", copy: "Við sjáum fyrir okkur óvænt bros í dag. Þú gætir verið ástæðan." },
+      { type: "Jólagáta", title: "Ljós en ekki sól", copy: "Ég lýsi en er ekki sól, og bráðna en er ekki snjór. Hvað er ég?", action: "Sýna svar", answer: "Kerti 🕯️" },
+      { type: "Lag dagsins", title: "Róleg stund", copy: "Finndu lag sem hægir aðeins á tímanum. Þrjár mínútur geta breytt heilli eftirmiðdagsstund." },
+      { type: "Fyndin speki", title: "Notalegt slær fullkomið", copy: "Fullkomin jól eru góð hugmynd. Notaleg jól eru frábær framkvæmd." },
+      { type: "Þakklæti", title: "Eitt sem gekk vel", copy: "Hugsaðu um eitt sem gekk vel á árinu. Þú þarft ekki að segja neinum frá því — en mundu að gefa sjálfri eða sjálfum þér kredit." },
+      { type: "Aðfangadagur", title: "Gleðileg jól", copy: "Takk fyrir samveruna, hjálpsemina og allt sem þið hafið lagt af mörkum á árinu. Hvort sem þú ert í fríi eða á vakt óskum við þér góðrar og hlýrrar jólastundar. ✦" }
+    ];
+
+    const grid = document.querySelector("#calendar-grid");
+    const dialog = document.querySelector("#day-dialog");
+    const subtitle = document.querySelector("#calendar-subtitle");
+    const openToday = document.querySelector("#open-today");
+    const demoButtons = [...document.querySelectorAll("[data-demo-day]")];
+    let demoDay = 18;
+    let lastTrigger = null;
+
+    function doorLabel(day, locked, opened) {
+      if (locked) return `${day}. desember, læstur, opnast ${day}. desember`;
+      if (day === demoDay) return `${day}. desember, í dag, opna glugga`;
+      return `${day}. desember, ${opened ? "skoðaður" : "tilbúinn"}, opna glugga`;
+    }
+
+    function readOpened() {
+      try { return JSON.parse(localStorage.getItem("jolagledi-opened") || "[]"); }
+      catch { return []; }
+    }
+
+    function markOpened(day) {
+      const opened = new Set(readOpened());
+      opened.add(day);
+      try { localStorage.setItem("jolagledi-opened", JSON.stringify([...opened])); } catch {}
+    }
+
+    function renderCalendar() {
+      const opened = new Set(readOpened());
+      grid.innerHTML = "";
+      subtitle.textContent = `Sýnidagur: ${demoDay}. desember`;
+      demoButtons.forEach(button => button.setAttribute("aria-pressed", String(Number(button.dataset.demoDay) === demoDay)));
+
+      content.forEach((item, index) => {
+        const day = index + 1;
+        const locked = day > demoDay;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `door${locked ? " locked" : ""}${day === demoDay ? " is-today" : ""}${day === 24 ? " special" : ""}`;
+        button.dataset.day = day;
+        button.setAttribute("aria-label", doorLabel(day, locked, opened.has(day)));
+        button.innerHTML = `
+          <span class="status" aria-hidden="true">${locked ? "⌁" : opened.has(day) ? "✓" : "✦"}</span>
+          <span class="number">${day}</span>
+          <span class="date">desember</span>
+          ${day === demoDay ? '<span class="today-tag">Í dag</span>' : ""}
+          ${day === 24 ? '<span class="special-copy">Sérstök jólakveðja á aðfangadag</span>' : ""}
+        `;
+        button.addEventListener("click", () => openDoor(day, button));
+        grid.append(button);
+      });
+    }
+
+    function openDoor(day, trigger) {
+      const locked = day > demoDay;
+      const item = content[day - 1];
+      lastTrigger = trigger;
+      dialog.classList.toggle("locked-dialog", locked);
+      document.querySelector("#modal-art").classList.toggle("gold", day === 24 && !locked);
+      document.querySelector("#modal-number").textContent = day;
+      document.querySelector("#modal-date").textContent = `${day}. desember`;
+      document.querySelector("#content-type").textContent = locked ? "Enn læst" : item.type;
+      document.querySelector("#dialog-title").textContent = locked ? "Þessi gluggi bíður aðeins" : item.title;
+      document.querySelector("#dialog-copy").textContent = locked ? `Glugginn opnast ${day}. desember. Þangað til fær leyndarmálið að vera í friði.` : item.copy;
+
+      const action = document.querySelector("#modal-action");
+      const answer = document.querySelector("#answer");
+      action.classList.toggle("hidden", locked || !item.action);
+      answer.classList.add("hidden");
+      if (!locked && item.action) {
+        action.textContent = item.action;
+        action.onclick = () => {
+          answer.textContent = item.answer;
+          answer.classList.remove("hidden");
+          action.classList.add("hidden");
+        };
+      }
+
+      if (!locked) { markOpened(day); renderCalendar(); }
+      dialog.showModal();
+    }
+
+    document.querySelector("#close-dialog").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => {
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener("close", () => { if (lastTrigger?.isConnected) lastTrigger.focus(); });
+    openToday.addEventListener("click", () => document.querySelector(`[data-day="${demoDay}"]`)?.click());
+    demoButtons.forEach(button => button.addEventListener("click", () => { demoDay = Number(button.dataset.demoDay); renderCalendar(); }));
+
+    renderCalendar();
+  </script>
+</body>
+</html>
