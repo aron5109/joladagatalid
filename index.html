@@ -94,8 +94,9 @@
     .prototype-control button[aria-pressed="true"] { color: var(--pine-deep); background: var(--gold-light); font-weight: 800; }
 
     .hero {
+      --landscape-h: max(7.5rem, min(140px, 15.2vw));
       position: relative;
-      padding: 2.4rem 1.2rem 5.2rem;
+      padding: 2.4rem 1.2rem calc(var(--landscape-h) + .4rem);
       color: var(--cream);
       text-align: center;
     }
@@ -106,12 +107,9 @@
     .today-button { display: inline-flex; align-items: center; gap: .7rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; padding: .85rem 1.2rem; color: var(--pine-deep); background: var(--cream); box-shadow: 0 9px 26px rgb(0 0 0 / 18%); font-weight: 850; cursor: pointer; }
     .today-button:hover { transform: translateY(-2px); }
 
-    .landscape { position: absolute; left: 50%; bottom: -1px; width: min(920px, 100%); height: 5rem; transform: translateX(-50%); overflow: hidden; opacity: .9; }
-    .landscape::before, .landscape::after { position: absolute; bottom: -3rem; width: 22rem; height: 8rem; border-radius: 50%; background: #f1eadb; content: ""; }
-    .landscape::before { left: 8%; transform: rotate(6deg); }
-    .landscape::after { right: 4%; transform: rotate(-8deg); }
-    .village { position: absolute; left: 19%; bottom: .55rem; z-index: 2; width: 3.3rem; height: 2rem; background: var(--cranberry); box-shadow: 4.1rem .2rem 0 #e0b557, 8.2rem -.1rem 0 #647f72, 12.5rem .25rem 0 #a44147; }
-    .village::before { position: absolute; top: -1.25rem; left: -.25rem; border-right: 1.9rem solid transparent; border-bottom: 1.5rem solid var(--cranberry-dark); border-left: 1.9rem solid transparent; content: ""; filter: drop-shadow(4.15rem .2rem 0 #ad832e) drop-shadow(8.3rem -.1rem 0 #405e51) drop-shadow(12.6rem .25rem 0 #75232c); }
+    .landscape { position: absolute; left: 50%; bottom: -1px; width: min(920px, 100%); height: var(--landscape-h); transform: translateX(-50%); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .village { display: block; width: 100%; height: 100%; }
+    .village .lit { fill: var(--gold-light); filter: url(#glow); }
 
     .calendar-card { position: relative; z-index: 3; border: 1px solid rgb(255 255 255 / 55%); border-radius: 2rem; padding: clamp(1rem, 4vw, 2.2rem); background: linear-gradient(145deg, rgb(255 252 245 / 98%), rgb(240 230 210 / 98%)); box-shadow: var(--shadow); }
     .calendar-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1.6rem; padding: 0 .25rem; }
@@ -231,7 +229,15 @@
         <h1 id="page-title">Opnum jólin<br>einn dag í einu</h1>
         <p>Bak við hvern glugga bíður lítil jólastund fyrir starfsfólkið okkar — speki, gleði, gátur og góðar kveðjur.</p>
         <button class="today-button" id="open-today" type="button">Opna glugga dagsins <span aria-hidden="true">→</span></button>
-        <div class="landscape" aria-hidden="true"><div class="village"></div></div>
+        <div class="landscape" aria-hidden="true">
+        <svg class="village" viewBox="0 0 920 140" preserveAspectRatio="xMidYMax slice" focusable="false">
+          <defs><filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <path d="M0 140 C90 128 150 92 260 84 C360 77 420 94 470 92 C560 88 600 70 700 72 C800 74 860 110 920 140 Z" fill="#dcd3c0"/>
+          <g><polygon points="194,92 205,58 216,92" fill="#1d4a3e"/><polygon points="199,77 205,58 211,77 205,73" fill="#fffaf0" opacity=".85"/><polygon points="224,90 232,64 240,90" fill="#2c5d4f"/><polygon points="227,78 232,64 237,78 232,76" fill="#fffaf0" opacity=".85"/><polygon points="171,100 178,78 185,100" fill="#2c5d4f"/><polygon points="174,90 178,78 182,90 178,88" fill="#fffaf0" opacity=".85"/><polygon points="659,80 668,50 677,80" fill="#1d4a3e"/><polygon points="662,66 668,50 674,66 668,64" fill="#fffaf0" opacity=".85"/><polygon points="688,78 700,40 712,78" fill="#123a31"/><polygon points="693,61 700,40 707,61 700,57" fill="#fffaf0" opacity=".85"/><polygon points="728,84 735,60 742,84" fill="#2c5d4f"/><polygon points="731,73 735,60 739,73 735,71" fill="#fffaf0" opacity=".85"/><polygon points="272,100 278,80 284,100" fill="#123a31"/><polygon points="274,91 278,80 282,91 278,89" fill="#fffaf0" opacity=".85"/><polygon points="633,100 640,78 647,100" fill="#123a31"/><polygon points="636,90 640,78 644,90 640,88" fill="#fffaf0" opacity=".85"/></g>
+          <g><rect x="300" y="64" width="54" height="44" fill="#9d2933"/><polygon points="295,66 327,41 359,66" fill="#6f1821"/><rect x="338" y="39" width="7" height="15" fill="#8a5a46"/><rect x="337" y="36" width="9" height="4" rx="2" fill="#fffaf0"/><polyline points="296,64 327,40 358,64" fill="none" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="310" y="75" width="8" height="10" rx="1.5"/><rect class="lit" x="336" y="75" width="8" height="10" rx="1.5"/><rect x="364" y="72" width="42" height="36" fill="#d9ae55"/><polygon points="359,74 385,54 411,74" fill="#a77d2c"/><polyline points="360,72 385,53 410,72" fill="none" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="381" y="80" width="8" height="10" rx="1.5"/><rect x="434" y="40" width="20" height="32" fill="#f6efe1"/><polygon points="431,42 444,20 457,42" fill="#6f1821"/><polyline points="432,41 444,19 456,41" fill="none" stroke="#fffaf0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="440" y="48" width="8" height="11" rx="4"/><path d="M444 6 l2.6 6 6.4.4 -5 4 1.6 6.2 -5.6-3.4 -5.6 3.4 1.6-6.2 -5-4 6.4-.4z" fill="#e6bd62"/><rect x="418" y="66" width="52" height="42" fill="#f6efe1"/><polygon points="413,68 444,44 475,68" fill="#6f1821"/><polyline points="414,66 444,43 474,66" fill="none" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="440" y="76" width="8" height="10" rx="1.5"/><rect x="484" y="66" width="58" height="42" fill="#5f7d70"/><polygon points="479,68 513,42 547,68" fill="#3e5c50"/><rect x="497" y="39" width="7" height="15" fill="#8a5a46"/><rect x="496" y="36" width="9" height="4" rx="2" fill="#fffaf0"/><polyline points="480,66 513,41 546,66" fill="none" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="494" y="76" width="8" height="10" rx="1.5"/><rect class="lit" x="524" y="76" width="8" height="10" rx="1.5"/><rect x="552" y="74" width="44" height="34" fill="#b04c3e"/><polygon points="547,76 574,56 601,76" fill="#75232c"/><polyline points="548,74 574,55 600,74" fill="none" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect class="lit" x="570" y="82" width="8" height="10" rx="1.5"/></g>
+          <path d="M40 140 C120 124 200 102 300 98 C400 94 460 101 540 99 C640 96 740 100 820 118 C860 127 880 134 900 140 Z" fill="#f1eadb"/>
+        </svg>
+        </div>
       </section>
 
       <section class="calendar-card" id="calendar" aria-labelledby="calendar-title">
