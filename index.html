@@ -468,13 +468,15 @@
       kertasnikir: () => svgArt(`
         ${legs(42, 72, 14)}
         ${tunic(42, 42, 74, 20, "#3f5a73")}
+        ${limb("M50 47 Q66 48 76 58", "#3f5a73")}
         ${head(40, 27, 1.25)}
-        <rect x="52" y="34" width="7" height="34" rx="1.5" fill="${C.white}"/>
-        <rect x="60" y="28" width="7" height="40" rx="1.5" fill="${C.cap}"/>
-        <rect x="68" y="36" width="7" height="32" rx="1.5" fill="#efd28a"/>
-        <path d="M55.5 32 q-4 -5 0 -11 q4 6 0 11 z M63.5 26 q-4 -5 0 -11 q4 6 0 11 z M71.5 34 q-4 -5 0 -11 q4 6 0 11 z" fill="${C.flame}" stroke-width="1.6"/>
-        ${limb("M36 52 Q44 64 54 60", "#3f5a73")}${hand(55, 60)}
-        ${limb("M48 50 Q60 48 74 54", "#3f5a73")}${hand(75, 55)}`),
+        <rect x="54" y="45" width="7" height="31" rx="1.5" fill="${C.white}"/>
+        <rect x="61" y="40" width="7" height="36" rx="1.5" fill="${C.cap}"/>
+        <rect x="68" y="47" width="7" height="29" rx="1.5" fill="#efd28a"/>
+        <path d="M57.5 43 q-4 -5 0 -10 q4 5 0 10 z M64.5 38 q-4 -5 0 -10 q4 5 0 10 z M71.5 45 q-4 -5 0 -10 q4 5 0 10 z" fill="${C.flame}" stroke-width="1.6"/>
+        <path d="M53 63 H76" fill="none" stroke="${INK}" stroke-width="5"/><path d="M53 63 H76" fill="none" stroke="#d9a441" stroke-width="2.6"/>
+        ${hand(76.5, 59)}
+        ${limb("M31 50 Q30 69 50 70", "#3f5a73")}${hand(52.5, 69.5)}`),
       mus: () => svgArt(`
         <path d="M64 84 q20 2 18 -14 q-1 -9 -9 -7" fill="none" stroke-width="2.6"/>
         <path d="M33 88 Q28 60 50 56 Q72 60 67 88 Z" fill="#9b8f86"/>
@@ -513,9 +515,11 @@
           <rect x="30" y="22" width="5" height="11" rx="1" fill="${C.wood}" stroke-width="1.6"/><rect x="67" y="23" width="5" height="11" rx="1" fill="${C.wood}" stroke-width="1.6"/>`);
       },
       piparkaka: () => svgArt(`
-        <path d="M50 6 V30" fill="none" stroke="${C.cap}" stroke-width="2.6"/>
-        <path d="M50 30 c-8 -6 -10 2 0 2 c10 0 8 -8 0 -2 z" fill="${C.cap}" stroke-width="1.6"/>
         <path d="M50 90 C20 70 18 42 36 38 C45 36 50 43 50 48 C50 43 55 36 64 38 C82 42 80 70 50 90 Z" fill="#b26a32"/>
+        <circle cx="50" cy="51.5" r="2.4" fill="#5a2e12" stroke-width="1.4"/>
+        <path d="M50 4 V20 M50 22 Q44 36 48.6 51 M50 22 Q56 36 51.4 51" fill="none" stroke="${INK}" stroke-width="4.6"/>
+        <path d="M50 4 V20 M50 22 Q44 36 48.6 51 M50 22 Q56 36 51.4 51" fill="none" stroke="${C.cap}" stroke-width="2.2"/>
+        <path d="M50 21 c-8 -6 -10 2 0 2 c10 0 8 -8 0 -2 z" fill="${C.cap}" stroke-width="1.6"/>
         <path d="M50 82 C28 67 27 47 38 45 C44 44 48 49 50 54 C52 49 56 44 62 45 C73 47 72 67 50 82 Z" fill="none" stroke="${C.white}" stroke-width="2.4" stroke-dasharray="0.1 4.4"/>
         <circle cx="43" cy="60" r="2.4" fill="${C.white}" stroke="none"/><circle cx="57" cy="60" r="2.4" fill="${C.white}" stroke="none"/>
         <path d="M43 68 Q50 74 57 68" fill="none" stroke="${C.white}" stroke-width="2.4"/>`),
