@@ -4,6 +4,8 @@ Sjónræn, gagnvirk frumgerð að íslensku jóladagatali með 24 gluggum. Allt 
 
 Þetta er frumgerð: dagsetningin er valin með sýnidagastýringunni efst á síðunni (1., 18. og 24. desember) og síðan notar hvorki raunverulega dagsetningu né læsingu á netþjóni. Staða skoðaðra glugga er vistuð í `localStorage` vafrans undir lyklinum `jolagledi-opened`.
 
+Þemað er í rauðum jólalitum og snjókorn falla yfir síðuna (slökkt á þeim ef stillt er á minni hreyfingu í stýrikerfinu). Nokkrir gluggar fá litla skreytingu (mús með jólahúfu, vettlinga, jólatré, piparkökuhjarta og jólaköttinn), og frá 12. desember birtist jólasveinn dagsins á glugganum, frá Stekkjastaur til Kertasníkis. Allar teikningar eru SVG sem teiknaðar eru beint í `index.html`.
+
 ## Keyra staðbundið
 
 Opnaðu `index.html` beint í vafra, eða keyrðu einfaldan vefþjón í möppunni:

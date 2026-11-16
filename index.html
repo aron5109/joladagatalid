@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#102f29">
+  <meta name="theme-color" content="#4a0f17">
   <title>Jólagleði – jóladagatal starfsfólks</title>
   <meta name="description" content="Sjónræn frumgerð að stafrænu jóladagatali starfsfólks með 24 gluggum.">
   <style>
     :root {
-      --pine: #123a31;
-      --pine-deep: #09241f;
+      --wine: #6f1821;
+      --wine-deep: #3a0a11;
       --cream: #fff9ed;
       --paper: #f3ead8;
       --cranberry: #9d2933;
       --cranberry-dark: #6f1821;
       --gold: #e6bd62;
       --gold-light: #ffe5a3;
-      --ink: #18322b;
-      --muted: #65736d;
-      --shadow: 0 18px 50px rgb(3 21 17 / 22%);
+      --ink: #2e1a1b;
+      --muted: #76625d;
+      --shadow: 0 18px 50px rgb(28 4 8 / 30%);
     }
 
     * { box-sizing: border-box; }
@@ -27,9 +27,9 @@
       margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(circle at 16% 8%, rgb(239 203 120 / 16%) 0 9%, transparent 25%),
-        radial-gradient(circle at 86% 4%, rgb(171 226 204 / 12%) 0 7%, transparent 23%),
-        linear-gradient(160deg, #17493d 0%, #0c2c26 52%, #071d19 100%);
+        radial-gradient(circle at 16% 8%, rgb(255 205 130 / 16%) 0 9%, transparent 25%),
+        radial-gradient(circle at 86% 4%, rgb(255 190 180 / 10%) 0 7%, transparent 23%),
+        linear-gradient(160deg, #8e1f2b 0%, #5e121c 52%, #360910 100%);
       font-family: ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
@@ -46,7 +46,7 @@
       z-index: 50;
       padding: .7rem 1rem;
       border-radius: .6rem;
-      color: var(--pine-deep);
+      color: var(--wine-deep);
       background: white;
       font-weight: 800;
     }
@@ -66,6 +66,27 @@
     }
     .snow::before { transform: translate3d(0, -40px, 0); opacity: .4; }
 
+    .snowfall { position: fixed; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+    .flake {
+      position: absolute;
+      top: -2rem;
+      left: var(--x);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: #fff;
+      opacity: var(--alpha);
+      filter: blur(var(--blur, 0));
+      animation: fall var(--dur) linear var(--delay) infinite;
+    }
+    .flake.crystal { border-radius: 0; background: none; filter: none; }
+    .flake.crystal svg { display: block; width: 100%; height: 100%; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; fill: none; }
+    @keyframes fall {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+      50% { transform: translate3d(var(--drift), 55vh, 0) rotate(160deg); }
+      100% { transform: translate3d(calc(var(--drift) * -.4), calc(100vh + 3rem), 0) rotate(320deg); }
+    }
+
     .site-shell { width: min(1160px, calc(100% - 2rem)); margin: 0 auto; padding: 1rem 0 4rem; }
 
     .topbar {
@@ -78,10 +99,10 @@
     }
     .brand { display: flex; align-items: center; gap: .5rem; font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; }
     .brand-mark { width: 1.25rem; height: 1.25rem; fill: var(--gold); }
-    .prototype-control { display: flex; gap: .25rem; padding: .3rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; background: rgb(3 19 16 / 30%); }
+    .prototype-control { display: flex; gap: .25rem; padding: .3rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; background: rgb(30 4 8 / 30%); }
     .prototype-control span { align-self: center; padding: 0 .5rem; font-size: .85rem; opacity: .8; }
     .prototype-control button { min-width: 2.4rem; border: 0; border-radius: 999px; padding: .5rem .7rem; color: var(--cream); background: transparent; cursor: pointer; }
-    .prototype-control button[aria-pressed="true"] { color: var(--pine-deep); background: var(--gold-light); font-weight: 800; }
+    .prototype-control button[aria-pressed="true"] { color: var(--wine-deep); background: var(--gold-light); font-weight: 800; }
 
     .hero {
       --landscape-h: max(7.5rem, min(140px, 15.2vw));
@@ -93,7 +114,7 @@
     .eyebrow { margin: 0 0 .6rem; color: var(--gold-light); font-size: 1rem; font-weight: 700; }
     h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 9vw, 5.7rem); font-weight: 500; line-height: .96; letter-spacing: -.045em; }
     .hero p { max-width: 38rem; margin: 1rem auto 1.5rem; color: rgb(255 249 237 / 78%); font-size: clamp(1rem, 2vw, 1.17rem); line-height: 1.65; }
-    .today-button { display: inline-flex; align-items: center; gap: .7rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; padding: .85rem 1.2rem; color: var(--pine-deep); background: var(--cream); box-shadow: 0 9px 26px rgb(0 0 0 / 18%); font-weight: 850; cursor: pointer; }
+    .today-button { display: inline-flex; align-items: center; gap: .7rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; padding: .85rem 1.2rem; color: var(--wine-deep); background: var(--cream); box-shadow: 0 9px 26px rgb(0 0 0 / 18%); font-weight: 850; cursor: pointer; }
     .today-button:hover { background: #fff; }
 
     .landscape { position: absolute; left: 50%; bottom: -1px; width: min(920px, 100%); height: var(--landscape-h); transform: translateX(-50%); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
@@ -124,12 +145,18 @@
     }
     .door:hover:not(.locked) { transform: translateY(-3px); }
     .door::before { position: absolute; inset: 7px; z-index: -1; border: 1px dashed rgb(255 255 255 / 22%); border-radius: .65rem; content: ""; }
-    .door:nth-child(6n+1) { --door-bg: #8f2932; }
-    .door:nth-child(6n+2) { --door-bg: #315d50; }
-    .door:nth-child(6n+3) { --door-bg: #b08739; }
-    .door:nth-child(6n+4) { --door-bg: #40506c; }
-    .door:nth-child(6n+5) { --door-bg: #b04c3e; }
-    .door:nth-child(6n) { --door-bg: #477268; }
+    .door:nth-child(6n+1) { --door-bg: #a3222d; }
+    .door:nth-child(6n+2) { --door-bg: #7b1824; }
+    .door:nth-child(6n+3) { --door-bg: #b8873a; }
+    .door:nth-child(6n+4) { --door-bg: #c4453a; }
+    .door:nth-child(6n+5) { --door-bg: #5e2a35; }
+    .door:nth-child(6n) { --door-bg: #8e3a2f; }
+    .door .art { position: absolute; right: .2rem; bottom: .2rem; z-index: -1; width: 64%; height: 76%; pointer-events: none; }
+    .door .art svg { display: block; width: 100%; height: 100%; }
+    .door.has-name .art { bottom: 1.5rem; height: 66%; }
+    .door.locked .art { filter: grayscale(1); opacity: .32; }
+    .door .lad-name { position: absolute; left: .55rem; bottom: .5rem; max-width: calc(100% - 1.1rem); overflow: hidden; padding: .12rem .42rem; border-radius: .35rem; background: rgb(30 4 8 / 30%); font-size: .78rem; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+    .door.locked .lad-name { color: #6f6b60; background: rgb(255 255 255 / 45%); }
     .door .number { display: block; font-family: Georgia, serif; font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1; }
     .door .status { position: absolute; right: .75rem; top: .7rem; display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: rgb(0 0 0 / 20%); font-size: .8rem; font-weight: 800; }
     .door .status svg { width: .8rem; height: .8rem; fill: currentColor; }
@@ -138,28 +165,35 @@
     .door.locked .status { color: #6f6b60; background: transparent; }
     .door.is-today { box-shadow: 0 0 0 4px var(--gold), 0 10px 26px rgb(131 93 29 / 24%); }
     .door.is-today::before { border-style: solid; border-color: var(--gold-light); }
-    .today-tag { position: absolute; right: .6rem; bottom: .55rem; padding: .2rem .5rem; border-radius: .35rem; color: var(--pine-deep); background: var(--gold-light); font-size: .8rem; font-weight: 800; }
-    .door.special { grid-column: span 3; min-height: 9rem; color: var(--pine-deep); background: linear-gradient(120deg, #f8d981, #fff0ba 42%, #d8a541); box-shadow: inset 0 0 0 1px rgb(117 69 8 / 20%); }
+    .today-tag { position: absolute; right: .6rem; top: .6rem; padding: .2rem .5rem; border-radius: .35rem; color: var(--wine-deep); background: var(--gold-light); font-size: .8rem; font-weight: 800; }
+    .door.special { grid-column: span 3; min-height: 9rem; color: var(--wine-deep); background: linear-gradient(120deg, #f8d981, #fff0ba 42%, #d8a541); box-shadow: inset 0 0 0 1px rgb(117 69 8 / 20%); }
     .door.special::before { border-color: rgb(116 66 7 / 25%); }
     .door.special .number { font-size: clamp(3rem, 11vw, 5.5rem); }
     .door.special .special-copy { position: absolute; right: 1.1rem; bottom: 1.2rem; max-width: 10rem; font-family: Georgia, serif; font-size: 1.05rem; text-align: right; }
-    .door.special.is-today .special-copy { bottom: 2.6rem; }
+    .door.special .art { right: auto; left: 50%; bottom: .3rem; width: 8rem; height: calc(100% - .6rem); transform: translateX(-50%); }
+    .door.special .lad-name { left: .8rem; bottom: .8rem; color: var(--wine-deep); background: rgb(255 255 255 / 45%); font-size: .9rem; }
     .door.special.locked { color: #6f6346; filter: saturate(.55); }
 
     .footer { padding: 1.5rem .5rem 0; color: rgb(255 249 237 / 64%); text-align: center; font-size: .78rem; }
 
     dialog { width: min(34rem, calc(100% - 2rem)); border: 0; border-radius: 1.5rem; padding: 0; color: var(--ink); background: var(--cream); box-shadow: 0 32px 90px rgb(0 0 0 / 48%); }
-    dialog::backdrop { background: rgb(4 24 20 / 70%); backdrop-filter: blur(5px); }
+    dialog::backdrop { background: rgb(30 5 9 / 72%); backdrop-filter: blur(5px); }
     .modal-art { position: relative; min-height: 8.5rem; padding: 1.3rem 1.4rem; overflow: hidden; color: white; background: linear-gradient(135deg, var(--cranberry-dark), var(--cranberry)); }
-    .modal-art.gold { color: var(--pine-deep); background: linear-gradient(135deg, #e5b84e, #ffe7a4); }
+    .modal-art.gold { color: var(--wine-deep); background: linear-gradient(135deg, #e5b84e, #ffe7a4); }
     .modal-number { position: relative; z-index: 1; font-family: Georgia, serif; font-size: 4.6rem; line-height: 1; }
     .modal-label { position: relative; z-index: 1; display: block; margin-top: .3rem; font-size: .95rem; font-weight: 700; opacity: .85; }
+    .modal-figure { position: absolute; right: 4.2rem; bottom: -.3rem; width: 8.5rem; height: 8.5rem; pointer-events: none; }
+    .modal-figure svg { display: block; width: 100%; height: 100%; }
+    .has-figure .modal-art { min-height: 10rem; }
+    .lad-note { margin: 0 0 1.2rem; padding: .85rem 1rem; border-radius: .8rem; background: #f6e3dc; }
+    .lad-note strong { display: block; margin-bottom: .2rem; color: var(--cranberry-dark); font-family: Georgia, serif; font-size: 1.15rem; font-weight: 500; }
+    .modal-body .lad-note p { color: #5a3f3c; font-size: .98rem; line-height: 1.55; }
     .close-button { position: absolute; right: 1rem; top: 1rem; z-index: 4; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid rgb(255 255 255 / 38%); border-radius: 50%; color: inherit; background: rgb(255 255 255 / 14%); cursor: pointer; }
     .modal-body { padding: 1.6rem; }
     .content-type { display: inline-block; margin-bottom: .5rem; color: var(--cranberry); font-size: .95rem; font-weight: 800; }
     .modal-body h3 { margin: 0 0 .8rem; font-family: Georgia, serif; font-size: clamp(1.65rem, 6vw, 2.3rem); font-weight: 500; line-height: 1.1; }
     .modal-body p { margin: 0; color: #4d5b55; font-size: 1.05rem; line-height: 1.65; }
-    .modal-action { margin-top: 1.25rem; border: 0; border-radius: 999px; padding: .8rem 1rem; color: white; background: var(--pine); font-weight: 800; cursor: pointer; }
+    .modal-action { margin-top: 1.25rem; border: 0; border-radius: 999px; padding: .8rem 1rem; color: white; background: var(--wine); font-weight: 800; cursor: pointer; }
     .modal-body .answer { margin-top: 1rem; padding: 1rem; border-left: 4px solid var(--gold); border-radius: .35rem; background: var(--paper); font-weight: 750; }
     .hidden { display: none !important; }
     .locked-dialog .modal-art { color: var(--ink); background: #ded7c9; }
@@ -181,17 +215,28 @@
       .prototype-control { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 1rem; }
       .prototype-control span { grid-column: 1 / -1; text-align: center; }
       .prototype-control button { padding: .35rem .5rem; }
+      .door .lad-name { font-size: .68rem; padding: .1rem .3rem; left: .4rem; bottom: .4rem; max-width: calc(100% - .8rem); }
+      .door.has-name .art { bottom: 1.25rem; }
+      .door .art { width: 54%; height: 62%; }
+      .door.has-name .art { height: 56%; }
+      .door .number { font-size: 2.1rem; }
+      .door.special .number { font-size: 3rem; }
+      .door.special .art { left: 44%; width: 6.5rem; }
+      .door.special .special-copy { max-width: 6.5rem; font-size: .92rem; }
+      .modal-figure { right: 3.6rem; width: 7.5rem; height: 7.5rem; }
       .calendar-head { align-items: flex-start; flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
       .door:hover:not(.locked) { transform: none; }
+      .snowfall { display: none; }
     }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#calendar">Fara beint í dagatalið</a>
   <div class="snow" aria-hidden="true"></div>
+  <div class="snowfall" id="snowfall" aria-hidden="true"></div>
   <div class="site-shell">
     <header class="topbar">
       <div class="brand"><svg class="brand-mark" viewBox="0 0 17 17" aria-hidden="true" focusable="false"><path d="M8.5 0 l2.6 6 6.4.4 -5 4 1.6 6.2 -5.6-3.4 -5.6 3.4 1.6-6.2 -5-4 6.4-.4z"/></svg><span>Jólagleði</span></div>
@@ -239,8 +284,10 @@
       <button class="close-button" id="close-dialog" type="button" aria-label="Loka glugga">✕</button>
       <span class="modal-number" id="modal-number"></span>
       <span class="modal-label" id="modal-date"></span>
+      <div class="modal-figure" id="modal-figure"></div>
     </div>
     <div class="modal-body">
+      <div class="lad-note hidden" id="lad-note"><strong id="lad-title"></strong><p id="lad-about"></p></div>
       <span class="content-type" id="content-type"></span>
       <h3 id="dialog-title"></h3>
       <p id="dialog-copy"></p>
@@ -277,6 +324,233 @@
       { type: "Aðfangadagur", title: "Gleðileg jól", copy: "Takk fyrir samveruna, hjálpsemina og allt sem þið hafið lagt af mörkum á árinu. Hvort sem þú ert í fríi eða á vakt óskum við þér gleðilegra jóla." }
     ];
 
+    // Teikningar: allt er teiknað hér í höndunum sem SVG, í sama flata stíl og þorpið.
+    const INK = "#2a1215";
+    const C = { skin: "#f3c9a5", nose: "#e08a76", white: "#fbf6ec", cap: "#cc3440", wood: "#c28a52", woodDark: "#8a5a33", metal: "#b3babd", metalDark: "#858d90", boot: "#3d2b25", trouser: "#4b3b36", tongue: "#d9545a", flame: "#ffcf5a" };
+    const svgArt = inner => `<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g stroke="${INK}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${inner}</g></svg>`;
+    const limb = (d, color, w = 5) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 3}"/><path d="${d}" fill="none" stroke="${color}" stroke-width="${w}"/>`;
+    const hand = (x, y, r = 3) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${C.skin}"/>`;
+    const tunic = (x, top, bottom, w, color) => `<path d="M${x - w / 2} ${top + 3} Q${x} ${top - 3} ${x + w / 2} ${top + 3} L${x + w / 2 + 3} ${bottom} L${x - w / 2 - 3} ${bottom} Z" fill="${color}"/><path d="M${x - w / 2 - 1.5} ${bottom - 7} H${x + w / 2 + 1.5}" stroke-width="2.6"/>`;
+    const legs = (x, top, len, color = C.trouser) => limb(`M${x - 4} ${top} L${x - 5} ${top + len}`, color, 6) + limb(`M${x + 4} ${top} L${x + 5} ${top + len}`, color, 6) + `<ellipse cx="${x - 8}" cy="${top + len + 2}" rx="5.5" ry="3" fill="${C.boot}"/><ellipse cx="${x + 8}" cy="${top + len + 2}" rx="5.5" ry="3" fill="${C.boot}"/>`;
+    function head(x, y, s = 1.25, o = {}) {
+      const f = o.flip ? -1 : 1, n = o.nose || 1;
+      const nose = o.longNose
+        ? `<path d="M1 0 C8 -3 20 -1 21 4 C21 8 10 8 1 6 Z" fill="${C.nose}"/>`
+        : `<ellipse cx="1" cy="3.2" rx="${3.4 * n}" ry="${2.8 * n}" fill="${C.nose}"/>`;
+      return `<g transform="translate(${x} ${y}) rotate(${o.rot || 0}) scale(${s * f} ${s})">
+        <path d="M-10 -6 C-11 -18 2 -24 12 -19 C19 -15 22 -8 23 -1 C18 -6 14 -9 10 -6 Z" fill="${o.cap || C.cap}"/>
+        ${o.pom === false ? "" : `<circle cx="23" cy="0" r="3" fill="${C.white}"/>`}
+        <ellipse cx="-9.5" cy="-1" rx="3" ry="4.5" fill="${C.white}"/><ellipse cx="9.5" cy="-1" rx="3" ry="4.5" fill="${C.white}"/>
+        <ellipse cx="0" cy="0" rx="9" ry="9.5" fill="${C.skin}"/>
+        <path d="M-9 1 C-11 10 -7 18 -3 22 Q-1.5 19 0 23 Q1.5 19 3 22 C7 18 11 10 9 1 C5 7 -5 7 -9 1 Z" fill="${C.white}"/>
+        ${o.tongue ? `<path d="M0 6.5 Q1 12 4.5 10.5 Q4 8 3 6.5 Z" fill="${C.tongue}" stroke-width="1.4"/>` : ""}
+        <path d="M-7.5 6.5 C-5 3.5 -1 4 0 6 C1 4 5 3.5 7.5 6.5 C4.5 8.5 1 7.5 0 7 C-1 7.5 -4.5 8.5 -7.5 6.5 Z" fill="${C.white}" stroke-width="1.6"/>
+        ${nose}
+        <circle cx="-3.4" cy="-1.2" r="1.2" fill="${INK}" stroke="none"/><circle cx="3.6" cy="-1.2" r="1.2" fill="${INK}" stroke="none"/>
+        <path d="M-6 -4 Q-3.5 -5.5 -1.5 -4.2 M1.8 -4.2 Q4 -5.5 6.5 -4" fill="none" stroke="${C.white}" stroke-width="1.8"/>
+        <rect x="-11" y="-9.5" width="22" height="5" rx="2.5" fill="${o.brim || C.white}"/>
+      </g>`;
+    }
+    const heart = (x, y, s, color) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 4 C-7 -1 -5 -8 0 -4 C5 -8 7 -1 0 4 Z" fill="${color}" stroke-width="${2 / s}"/>`;
+
+    const art = {
+      stekkjastaur: () => svgArt(`
+        <path d="M8 90 v5 M14 90 v5" stroke-width="2.4"/>
+        <path d="M3 83 q-2 -7 4 -8 q2 -5 7 -3 q5 -3 8 2 q6 1 4 7 q1 6 -5 6 h-13 q-6 0 -5 -4 z" fill="${C.white}"/>
+        <ellipse cx="4" cy="79" rx="4" ry="3.4" fill="#3d2f2c"/>
+        ${limb("M45 66 L41 95", C.wood, 4.5)}${limb("M55 66 L60 95", C.wood, 4.5)}
+        ${tunic(50, 42, 68, 20, "#7a5038")}
+        ${limb("M42 48 Q33 53 27 46", "#7a5038")}${hand(26, 45)}
+        ${limb("M58 48 Q67 53 73 46", "#7a5038")}${hand(74, 45)}
+        ${head(50, 27, 1.25, { pom: false, brim: "#8f1f2a" })}`),
+      giljagaur: () => svgArt(`
+        ${legs(42, 70, 14)}
+        ${tunic(42, 42, 72, 20, "#3f5a73")}
+        ${limb("M36 50 Q29 60 32 67", "#3f5a73")}${hand(32, 68)}
+        <path d="M60 62 Q71 48 82 62" fill="none" stroke-width="2.4"/>
+        <path d="M60 62 H82 L79 88 H63 Z" fill="${C.wood}"/><path d="M61 70 H81 M62.5 81 H79.5" fill="none"/>
+        <path d="M59 63 q1 -6 6 -4 q3 -5 7 -1 q4 -3 7 0 q5 -1 4 5 z" fill="${C.white}"/>
+        ${limb("M50 50 Q60 56 66 58", "#3f5a73")}${hand(67, 58)}
+        ${head(44, 28, 1.25, { tongue: true, rot: 14 })}`),
+      stufur: () => svgArt(`
+        ${legs(38, 74, 10)}
+        ${tunic(38, 52, 76, 20, "#c9963e")}
+        ${limb("M31 58 Q25 66 28 72", "#c9963e")}${hand(28, 73)}
+        ${limb("M46 58 Q56 60 60 54", "#c9963e")}
+        <path d="M61 54 L71 46" stroke-width="5"/>
+        <ellipse cx="80" cy="38" rx="14" ry="9" transform="rotate(-25 80 38)" fill="#3a3a40"/>
+        <ellipse cx="80" cy="38" rx="9.5" ry="5.5" transform="rotate(-25 80 38)" fill="#5d5d64" stroke-width="1.4"/>
+        <circle cx="78" cy="39" r="1.4" fill="#c98a45" stroke="none"/><circle cx="83" cy="36" r="1.1" fill="#c98a45" stroke="none"/>
+        ${hand(61, 54)}
+        ${head(38, 38, 1.2, { cap: "#b52a36", pom: false, brim: "#d9a441" })}`),
+      thvorusleikir: () => svgArt(`
+        ${legs(48, 74, 14)}
+        ${tunic(48, 44, 76, 13, "#6e4a6b")}
+        ${limb("M72 96 L71 26", C.wood, 3.4)}
+        <ellipse cx="71" cy="17" rx="5" ry="8.5" fill="${C.wood}"/>
+        ${limb("M53 52 Q62 54 70 48", "#6e4a6b", 4.5)}${hand(70.5, 48)}
+        ${limb("M44 54 Q50 66 69 67", "#6e4a6b", 4.5)}${hand(70.5, 67)}
+        ${head(50, 27, 1.25, { tongue: true, flip: true, rot: -12, pom: false, brim: "#8f1f2a" })}`),
+      pottaskefill: () => svgArt(`
+        ${head(50, 40, 1.3, { tongue: true })}
+        <path d="M20 56 H80 L76 88 Q50 96 24 88 Z" fill="${C.metal}"/>
+        <path d="M28 64 Q27 76 31 84" fill="none" stroke="${C.white}" stroke-width="2.4" opacity=".8"/>
+        <path d="M17 62 H11 V71 H19 M83 62 H89 V71 H81" fill="none" stroke-width="2.6"/>
+        <rect x="16" y="51" width="68" height="8" rx="4" fill="${C.metalDark}"/>
+        <path d="M44 59 v7 q2.5 4 5 0 v-7 M62 59 v4 q2 3 4 0 v-4" fill="#f1e1bd" stroke-width="1.6"/>
+        ${hand(33, 52, 3.4)}${hand(67, 52, 3.4)}`),
+      askasleikir: () => svgArt(`
+        ${legs(50, 76, 10)}
+        ${tunic(50, 44, 78, 22, "#c9963e")}
+        ${head(50, 27, 1.25, { tongue: true, pom: false, brim: "#8f1f2a" })}
+        <path d="M33 59 H28 V65 H34 M67 59 H72 V65 H66" fill="none" stroke-width="2.6"/>
+        <path d="M33 56 H67 L63 78 Q50 83 37 78 Z" fill="${C.wood}"/>
+        <path d="M37 64 Q50 67 63 64" fill="none" stroke="${C.woodDark}" stroke-width="2"/>
+        <ellipse cx="50" cy="56" rx="17" ry="4" fill="#efe0be"/>
+        ${hand(33, 60)}${hand(67, 60)}`),
+      hurdaskellir: () => svgArt(`
+        <rect x="8" y="10" width="38" height="84" fill="#5a3a28"/>
+        <rect x="12" y="14" width="30" height="80" fill="#a26f42"/>
+        <rect x="17" y="21" width="20" height="26" rx="2" fill="none"/><rect x="17" y="56" width="20" height="30" rx="2" fill="none"/>
+        <circle cx="37" cy="52" r="2.2" fill="${C.flame}"/>
+        <path d="M50 8 l5 -4 M52 16 l7 -2 M4 6 l-2 -4" fill="none" stroke="${C.white}" stroke-width="2.6"/>
+        ${legs(70, 72, 14)}
+        ${tunic(70, 42, 74, 20, "#3f5a73")}
+        ${limb("M63 50 Q55 46 47 42", "#3f5a73")}${hand(46, 42)}
+        ${limb("M64 58 Q56 62 47 62", "#3f5a73")}${hand(46, 62)}
+        ${head(70, 27, 1.25, { flip: true, rot: -8, cap: "#b52a36" })}`),
+      skyrgamur: () => svgArt(`
+        ${tunic(50, 40, 62, 24, "#7a5038")}
+        ${head(50, 26, 1.25, { tongue: true })}
+        <ellipse cx="12" cy="80" rx="6" ry="12" fill="${C.woodDark}"/>
+        <path d="M26 50 Q22 70 28 92 H72 Q78 70 74 50 Z" fill="${C.wood}"/>
+        <path d="M38 52 Q36 72 39 92 M50 53 V92 M62 52 Q64 72 61 92" fill="none" stroke="${C.woodDark}" stroke-width="1.8"/>
+        <path d="M24.5 62 Q50 67 75.5 62 M25.5 82 Q50 87 74.5 82" fill="none" stroke-width="3"/>
+        <ellipse cx="50" cy="50" rx="24" ry="5" fill="${C.white}"/>
+        ${hand(40, 50)}${hand(60, 50)}
+        <path d="M37 47 q3 -3 6 0 M57 47 q3 -3 6 0" fill="none" stroke="${C.white}" stroke-width="2.4"/>`),
+      bjugnakraekir: () => svgArt(`
+        ${legs(50, 72, 14)}
+        ${tunic(50, 42, 74, 20, "#3f5a73")}
+        ${head(50, 26, 1.25, { rot: -6, pom: false, brim: "#8f1f2a" })}
+        ${limb("M16 84 Q14 52 46 56 Q74 60 84 32", "#8e3a2f", 10)}
+        <path d="M16 84 l-3 6 M84 32 l4 -5" fill="none" stroke-width="1.6"/>
+        <circle cx="24" cy="62" r="1.3" fill="#e0a08f" stroke="none"/><circle cx="40" cy="57" r="1.3" fill="#e0a08f" stroke="none"/><circle cx="62" cy="57" r="1.3" fill="#e0a08f" stroke="none"/><circle cx="76" cy="46" r="1.3" fill="#e0a08f" stroke="none"/>
+        ${hand(32, 57, 3.4)}${hand(68, 54, 3.4)}`),
+      gluggagaegir: () => svgArt(`
+        <rect x="12" y="8" width="76" height="70" rx="2" fill="${C.woodDark}"/>
+        <rect x="18" y="14" width="64" height="58" fill="#d6e6ee"/>
+        <path d="M18 26 Q24 24 26 14 M82 26 Q76 24 74 14" fill="none" stroke="${C.white}" stroke-width="3"/>
+        ${head(50, 54, 1.4)}
+        <rect x="6" y="70" width="88" height="10" rx="2" fill="#a26f42"/>
+        ${hand(34, 70, 3.6)}${hand(66, 70, 3.6)}`),
+      gattathefur: () => svgArt(`
+        <rect x="62" y="8" width="32" height="86" fill="#5a3a28"/>
+        <rect x="66" y="12" width="24" height="82" fill="#2e1a20"/>
+        <path d="M66 12 L80 18 V96 L66 94 Z" fill="#a26f42"/>
+        <path d="M56 30 q-4 -4 -8 0 t-8 0 M58 42 q-4 -4 -8 0 t-8 0 M56 54 q-4 -4 -8 0 t-8 0" fill="none" stroke="${C.flame}" stroke-width="2.4"/>
+        ${legs(26, 72, 14)}
+        ${tunic(26, 44, 74, 18, "#6e4a6b")}
+        ${limb("M33 52 Q40 56 38 64", "#6e4a6b")}${hand(38, 65)}
+        ${head(24, 32, 1.2, { longNose: true, pom: false, brim: "#8f1f2a" })}`),
+      ketkrokur: () => svgArt(`
+        ${legs(34, 72, 14)}
+        ${tunic(34, 44, 74, 20, "#7a5038")}
+        ${limb("M24 92 L78 10", C.wood, 3.4)}
+        <path d="M78 10 Q87 11 84 20 Q82 24 79 21" fill="none" stroke-width="2.6"/>
+        <path d="M82 22 V27" stroke-width="2.4"/>
+        <circle cx="82" cy="27" r="2.6" fill="${C.white}"/>
+        <path d="M82 29 Q92 36 89 52 Q84 64 75 56 Q71 44 80 31 Z" fill="#8f4a34"/>
+        <path d="M80 40 q4 2 6 8" fill="none" stroke="#c77b5c" stroke-width="2"/>
+        ${limb("M40 52 Q46 54 49 48", "#7a5038")}${hand(49.5, 47)}
+        ${limb("M28 54 Q34 66 38 66", "#7a5038")}${hand(38.5, 66)}
+        ${head(34, 28, 1.25, { rot: 6, cap: "#b52a36", brim: "#d9a441" })}`),
+      kertasnikir: () => svgArt(`
+        ${legs(42, 72, 14)}
+        ${tunic(42, 42, 74, 20, "#3f5a73")}
+        ${head(40, 27, 1.25)}
+        <rect x="52" y="34" width="7" height="34" rx="1.5" fill="${C.white}"/>
+        <rect x="60" y="28" width="7" height="40" rx="1.5" fill="${C.cap}"/>
+        <rect x="68" y="36" width="7" height="32" rx="1.5" fill="#efd28a"/>
+        <path d="M55.5 32 q-4 -5 0 -11 q4 6 0 11 z M63.5 26 q-4 -5 0 -11 q4 6 0 11 z M71.5 34 q-4 -5 0 -11 q4 6 0 11 z" fill="${C.flame}" stroke-width="1.6"/>
+        ${limb("M36 52 Q44 64 54 60", "#3f5a73")}${hand(55, 60)}
+        ${limb("M48 50 Q60 48 74 54", "#3f5a73")}${hand(75, 55)}`),
+      mus: () => svgArt(`
+        <path d="M64 84 q20 2 18 -14 q-1 -9 -9 -7" fill="none" stroke-width="2.6"/>
+        <path d="M33 88 Q28 60 50 56 Q72 60 67 88 Z" fill="#9b8f86"/>
+        <ellipse cx="50" cy="76" rx="9" ry="10" fill="#dcd3ca" stroke="none"/>
+        <circle cx="35" cy="37" r="8" fill="#9b8f86"/><circle cx="35" cy="37" r="4.5" fill="#e8a7a5" stroke="none"/>
+        <circle cx="65" cy="37" r="8" fill="#9b8f86"/><circle cx="65" cy="37" r="4.5" fill="#e8a7a5" stroke="none"/>
+        <ellipse cx="50" cy="47" rx="14" ry="12" fill="#9b8f86"/>
+        <circle cx="45" cy="45" r="1.8" fill="${INK}" stroke="none"/><circle cx="55" cy="45" r="1.8" fill="${INK}" stroke="none"/>
+        <circle cx="50" cy="51.5" r="2.2" fill="#e08a96"/>
+        <path d="M44 52 L33 50 M44 54 L34 56 M56 52 L67 50 M56 54 L66 56" fill="none" stroke-width="1"/>
+        <path d="M38 37 C38 22 54 16 64 20 C71 23 74 30 74 38 C70 33 66 32 62 35 Z" fill="${C.cap}"/>
+        <circle cx="74" cy="39" r="3.4" fill="${C.white}"/>
+        <path d="M36 38 Q50 30 64 36" fill="none" stroke="${INK}" stroke-width="7"/><path d="M36 38 Q50 30 64 36" fill="none" stroke="${C.white}" stroke-width="4.4"/>
+        <ellipse cx="44" cy="64" rx="3.4" ry="2.6" fill="#b3a79e"/><ellipse cx="56" cy="64" rx="3.4" ry="2.6" fill="#b3a79e"/>
+        <ellipse cx="41" cy="89" rx="5" ry="2.6" fill="#b3a79e"/><ellipse cx="59" cy="89" rx="5" ry="2.6" fill="#b3a79e"/>`),
+      tre: () => svgArt(`
+        <rect x="45" y="76" width="10" height="8" fill="#7a5038"/>
+        <path d="M34 84 H66 L62 96 H38 Z" fill="${C.cap}"/><path d="M35 88 H65" fill="none" stroke="${C.white}" stroke-width="2.6"/>
+        <path d="M50 46 L76 76 Q63 72 50 76 Q37 72 24 76 Z" fill="#2f5d47"/>
+        <path d="M50 28 L70 56 Q60 52 50 55 Q40 52 30 56 Z" fill="#2f5d47"/>
+        <path d="M50 10 L64 36 Q57 33 50 35 Q43 33 36 36 Z" fill="#2f5d47"/>
+        <path d="M28 74 Q37 70 46 73 M54 73 Q63 70 72 74 M34 54 Q41 51 47 53" fill="none" stroke="${C.white}" stroke-width="2.4"/>
+        ${heart(41, 66, 1.1, C.cap)}${heart(59, 47, 1, C.cap)}${heart(51, 24, .9, C.cap)}
+        <rect x="58" y="62" width="3.4" height="7" fill="${C.white}" stroke-width="1.4"/><path d="M59.7 61 q-2 -3 0 -5 q2 2 0 5z" fill="${C.flame}" stroke="none"/>
+        <rect x="40" y="40" width="3.4" height="7" fill="${C.white}" stroke-width="1.4"/><path d="M41.7 39 q-2 -3 0 -5 q2 2 0 5z" fill="${C.flame}" stroke="none"/>`),
+      vettlingar: () => {
+        const mitten = (x, y, color, band, rot) => `<g transform="translate(${x} ${y}) rotate(${rot})">
+          <path d="M-9 0 Q-18 -2 -17 -10 Q-16 -15 -11 -11 L-10 -6" fill="${color}"/>
+          <path d="M-9 14 L-10 -6 Q-10 -22 0 -22 Q10 -22 10 -6 L9 14 Z" fill="${color}"/>
+          <path d="M-7 -4 l3.5 -4 l3.5 4 l3.5 -4 l3.5 4" fill="none" stroke="${band}" stroke-width="2"/>
+          <circle cx="-3.5" cy="-14" r="1.3" fill="${band}" stroke="none"/><circle cx="3.5" cy="-14" r="1.3" fill="${band}" stroke="none"/>
+          <rect x="-10.5" y="9" width="21" height="8" rx="1.5" fill="${band}"/>
+        </g>`;
+        return svgArt(`<path d="M4 22 Q50 30 96 22" fill="none" stroke="${C.white}" stroke-width="2"/>
+          ${mitten(32, 52, C.cap, C.white, -6)}${mitten(68, 54, C.white, C.cap, 8)}
+          <rect x="30" y="22" width="5" height="11" rx="1" fill="${C.wood}" stroke-width="1.6"/><rect x="67" y="23" width="5" height="11" rx="1" fill="${C.wood}" stroke-width="1.6"/>`);
+      },
+      piparkaka: () => svgArt(`
+        <path d="M50 6 V30" fill="none" stroke="${C.cap}" stroke-width="2.6"/>
+        <path d="M50 30 c-8 -6 -10 2 0 2 c10 0 8 -8 0 -2 z" fill="${C.cap}" stroke-width="1.6"/>
+        <path d="M50 90 C20 70 18 42 36 38 C45 36 50 43 50 48 C50 43 55 36 64 38 C82 42 80 70 50 90 Z" fill="#b26a32"/>
+        <path d="M50 82 C28 67 27 47 38 45 C44 44 48 49 50 54 C52 49 56 44 62 45 C73 47 72 67 50 82 Z" fill="none" stroke="${C.white}" stroke-width="2.4" stroke-dasharray="0.1 4.4"/>
+        <circle cx="43" cy="60" r="2.4" fill="${C.white}" stroke="none"/><circle cx="57" cy="60" r="2.4" fill="${C.white}" stroke="none"/>
+        <path d="M43 68 Q50 74 57 68" fill="none" stroke="${C.white}" stroke-width="2.4"/>`),
+      kottur: () => svgArt(`
+        ${limb("M66 86 Q90 82 86 60 Q84 52 77 56", "#3a3035", 5)}
+        <path d="M30 92 Q26 58 44 52 Q50 50 56 52 Q74 58 70 92 Z" fill="#3a3035"/>
+        <path d="M36 34 L34 16 L46 27 Z M64 34 L66 16 L54 27 Z" fill="#3a3035"/>
+        <ellipse cx="50" cy="40" rx="17" ry="15" fill="#3a3035"/>
+        <path d="M37 32 L36 22 L43 28 Z M63 32 L64 22 L57 28 Z" fill="#b5838a" stroke="none"/>
+        <ellipse cx="43" cy="38" rx="4.4" ry="4" fill="#f2c641"/><ellipse cx="57" cy="38" rx="4.4" ry="4" fill="#f2c641"/>
+        <path d="M43 35 V41 M57 35 V41" stroke-width="2"/>
+        <path d="M48 45 h4 l-2 2.4 z" fill="#d98b99" stroke-width="1.2"/>
+        <path d="M44 47 L31 45 M44 49 L32 52 M56 47 L69 45 M56 49 L68 52" fill="none" stroke="${C.white}" stroke-width="1"/>
+        <path d="M36 54 Q50 62 64 54" fill="none" stroke="${C.cap}" stroke-width="4"/>
+        <ellipse cx="42" cy="91" rx="6" ry="3" fill="#3a3035"/><ellipse cx="58" cy="91" rx="6" ry="3" fill="#3a3035"/>`)
+    };
+
+    const lads = {
+      12: { art: "stekkjastaur", name: "Stekkjastaur", about: "Hann er staurfættur og stirður til gangs, og laumast í fjárhúsin til að sjúga ærnar." },
+      13: { art: "giljagaur", name: "Giljagaur", about: "Hann felur sig í giljum og skýst inn í fjósið til að fleyta froðuna ofan af mjólkurfötunum." },
+      14: { art: "stufur", name: "Stúfur", about: "Hann er minnstur bræðranna og kroppar viðbrenndar agnir af pönnunum." },
+      15: { art: "thvorusleikir", name: "Þvörusleikir", about: "Hann er grannur eins og þvaran sem hann sleikir þegar enginn sér til." },
+      16: { art: "pottaskefill", name: "Pottaskefill", about: "Hann skefur skófirnar innan úr pottunum áður en nokkur nær að vaska upp." },
+      17: { art: "askasleikir", name: "Askasleikir", about: "Hann felur sig undir rúmi og sleikir askana sem fólk setur á gólfið." },
+      18: { art: "hurdaskellir", name: "Hurðaskellir", about: "Hann skellir hurðum um miðjar nætur svo enginn fær frið til að sofa." },
+      19: { art: "skyrgamur", name: "Skyrgámur", about: "Hann brýtur lokið af skyrtunnunni og hámar í sig skyrið." },
+      20: { art: "bjugnakraekir", name: "Bjúgnakrækir", about: "Hann situr uppi í rjáfrinu og krækir sér í bjúgu sem hanga þar í reyk." },
+      21: { art: "gluggagaegir", name: "Gluggagægir", about: "Hann gægist inn um gluggana til að sjá hvað hann getur nælt sér í." },
+      22: { art: "gattathefur", name: "Gáttaþefur", about: "Hann er með risastórt nef og finnur ilminn af laufabrauðinu langar leiðir." },
+      23: { art: "ketkrokur", name: "Ketkrókur", about: "Hann rennir krók niður um strompinn og krækir sér í hangikjötið." },
+      24: { art: "kertasnikir", name: "Kertasníkir", about: "Hann kemur síðastur og eltir börnin til að ná sér í kerti." }
+    };
+    const decorations = { 2: "mus", 3: "vettlingar", 6: "tre", 9: "piparkaka", 11: "kottur" };
+    const artFor = day => lads[day]?.art || decorations[day];
+
     const grid = document.querySelector("#calendar-grid");
     const dialog = document.querySelector("#day-dialog");
     const subtitle = document.querySelector("#calendar-subtitle");
@@ -287,9 +561,10 @@
     const lockIcon = '<svg viewBox="0 0 16 16" focusable="false"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2h.5a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zm1.6 0h3.8V5a1.9 1.9 0 0 0-3.8 0z"/></svg>';
 
     function doorLabel(day, locked, opened) {
-      if (locked) return `${day}. desember, læstur, opnast ${day}. desember`;
-      if (day === demoDay) return `${day}. desember, í dag, opna glugga`;
-      return `${day}. desember, ${opened ? "skoðaður" : "tilbúinn"}, opna glugga`;
+      const lad = lads[day] ? `, ${lads[day].name} kemur` : "";
+      if (locked) return `${day}. desember${lad}, læstur, opnast ${day}. desember`;
+      if (day === demoDay) return `${day}. desember${lad}, í dag, opna glugga`;
+      return `${day}. desember${lad}, ${opened ? "skoðaður" : "tilbúinn"}, opna glugga`;
     }
 
     function readOpened() {
@@ -314,13 +589,18 @@
         const locked = day > demoDay;
         const button = document.createElement("button");
         button.type = "button";
-        button.className = `door${locked ? " locked" : ""}${day === demoDay ? " is-today" : ""}${day === 24 ? " special" : ""}`;
+        const isToday = day === demoDay;
+        const lad = lads[day];
+        const drawing = artFor(day);
+        button.className = `door${locked ? " locked" : ""}${isToday ? " is-today" : ""}${day === 24 ? " special" : ""}${lad ? " has-name" : ""}`;
         button.dataset.day = day;
         button.setAttribute("aria-label", doorLabel(day, locked, opened.has(day)));
         button.innerHTML = `
-          ${locked ? `<span class="status" aria-hidden="true">${lockIcon}</span>` : opened.has(day) ? '<span class="status" aria-hidden="true">✓</span>' : ""}
+          ${drawing ? `<span class="art" aria-hidden="true">${art[drawing]()}</span>` : ""}
+          ${isToday ? "" : locked ? `<span class="status" aria-hidden="true">${lockIcon}</span>` : opened.has(day) ? '<span class="status" aria-hidden="true">✓</span>' : ""}
           <span class="number">${day}</span>
-          ${day === demoDay ? '<span class="today-tag">Í dag</span>' : ""}
+          ${lad ? `<span class="lad-name" aria-hidden="true">${lad.name}</span>` : ""}
+          ${isToday ? '<span class="today-tag">Í dag</span>' : ""}
           ${day === 24 ? '<span class="special-copy">Sérstök jólakveðja á aðfangadag</span>' : ""}
         `;
         button.addEventListener("click", () => openDoor(day));
@@ -335,7 +615,16 @@
       dialog.classList.toggle("locked-dialog", locked);
       document.querySelector("#modal-art").classList.toggle("gold", day === 24 && !locked);
       document.querySelector("#modal-number").textContent = day;
-      document.querySelector("#modal-date").textContent = `${day}. desember`;
+      const lad = lads[day];
+      const drawing = artFor(day);
+      document.querySelector("#modal-date").textContent = lad && !locked ? `${day}. desember · ${lad.name}` : `${day}. desember`;
+      document.querySelector("#modal-figure").innerHTML = drawing && !locked ? art[drawing]() : "";
+      dialog.classList.toggle("has-figure", Boolean(drawing && !locked));
+      document.querySelector("#lad-note").classList.toggle("hidden", !lad || locked);
+      if (lad && !locked) {
+        document.querySelector("#lad-title").textContent = `${lad.name} kom til byggða í nótt`;
+        document.querySelector("#lad-about").textContent = lad.about;
+      }
       document.querySelector("#content-type").textContent = locked ? "Enn læst" : item.type;
       document.querySelector("#dialog-title").textContent = locked ? "Þessi gluggi bíður aðeins" : item.title;
       document.querySelector("#dialog-copy").textContent = locked ? `Glugginn opnast ${day}. desember. Þangað til fær leyndarmálið að vera í friði.` : item.copy;
@@ -367,7 +656,26 @@
     openToday.addEventListener("click", () => document.querySelector(`[data-day="${demoDay}"]`)?.click());
     demoButtons.forEach(button => button.addEventListener("click", () => { demoDay = Number(button.dataset.demoDay); renderCalendar(); }));
 
+    function letItSnow() {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const box = document.querySelector("#snowfall");
+      const crystal = '<svg viewBox="0 0 20 20" focusable="false"><path d="M10 1v18M2.2 5.5l15.6 9M2.2 14.5l15.6-9M10 4l-2-2M10 4l2-2M10 16l-2 2M10 16l2 2"/></svg>';
+      const count = innerWidth < 620 ? 28 : 55;
+      const rand = (a, b) => a + Math.random() * (b - a);
+      for (let i = 0; i < count; i++) {
+        const flake = document.createElement("span");
+        const isCrystal = i % 9 === 0;
+        const size = isCrystal ? rand(10, 16) : rand(2, 6.5);
+        flake.className = `flake${isCrystal ? " crystal" : ""}`;
+        if (isCrystal) flake.innerHTML = crystal;
+        const dur = rand(11, 24) * (isCrystal ? 1.2 : 1) * (size < 3.5 ? 1.3 : 1);
+        flake.style.cssText = `--x:${rand(-2, 100)}%;--size:${size}px;--alpha:${rand(.45, .9).toFixed(2)};--dur:${dur.toFixed(1)}s;--delay:${(-rand(0, dur)).toFixed(1)}s;--drift:${rand(-40, 40).toFixed(0)}px;${size > 5.5 && !isCrystal ? "--blur:1px;" : ""}`;
+        box.append(flake);
+      }
+    }
+
     renderCalendar();
+    letItSnow();
   </script>
 </body>
 </html>
