@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102f29">
-  <title>Jólagleði — jóladagatal starfsfólks</title>
+  <title>Jólagleði – jóladagatal starfsfólks</title>
   <meta name="description" content="Sjónræn frumgerð að stafrænu jóladagatali starfsfólks með 24 gluggum.">
   <style>
     :root {
@@ -76,20 +76,10 @@
       color: var(--cream);
       margin-bottom: 1.6rem;
     }
-    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 850; letter-spacing: .05em; }
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 1px solid rgb(255 255 255 / 28%);
-      border-radius: 50%;
-      background: rgb(255 255 255 / 9%);
-      color: var(--gold-light);
-      font-size: 1.2rem;
-    }
+    .brand { display: flex; align-items: center; gap: .5rem; font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; }
+    .brand-mark { width: 1.25rem; height: 1.25rem; fill: var(--gold); }
     .prototype-control { display: flex; gap: .25rem; padding: .3rem; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; background: rgb(3 19 16 / 30%); }
-    .prototype-control span { align-self: center; padding: 0 .5rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; opacity: .75; }
+    .prototype-control span { align-self: center; padding: 0 .5rem; font-size: .85rem; opacity: .8; }
     .prototype-control button { min-width: 2.4rem; border: 0; border-radius: 999px; padding: .5rem .7rem; color: var(--cream); background: transparent; cursor: pointer; }
     .prototype-control button[aria-pressed="true"] { color: var(--pine-deep); background: var(--gold-light); font-weight: 800; }
 
@@ -100,12 +90,11 @@
       color: var(--cream);
       text-align: center;
     }
-    .eyebrow { display: inline-flex; gap: .5rem; align-items: center; margin: 0 0 .75rem; color: var(--gold-light); font-size: .74rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
-    .eyebrow::before, .eyebrow::after { width: 1.8rem; height: 1px; background: currentColor; content: ""; opacity: .65; }
+    .eyebrow { margin: 0 0 .6rem; color: var(--gold-light); font-size: 1rem; font-weight: 700; }
     h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 9vw, 5.7rem); font-weight: 500; line-height: .96; letter-spacing: -.045em; }
     .hero p { max-width: 38rem; margin: 1rem auto 1.5rem; color: rgb(255 249 237 / 78%); font-size: clamp(1rem, 2vw, 1.17rem); line-height: 1.65; }
     .today-button { display: inline-flex; align-items: center; gap: .7rem; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; padding: .85rem 1.2rem; color: var(--pine-deep); background: var(--cream); box-shadow: 0 9px 26px rgb(0 0 0 / 18%); font-weight: 850; cursor: pointer; }
-    .today-button:hover { transform: translateY(-2px); }
+    .today-button:hover { background: #fff; }
 
     .landscape { position: absolute; left: 50%; bottom: -1px; width: min(920px, 100%); height: var(--landscape-h); transform: translateX(-50%); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
     .village { display: block; width: 100%; height: 100%; }
@@ -115,11 +104,6 @@
     .calendar-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1.6rem; padding: 0 .25rem; }
     .calendar-head h2 { margin: 0 0 .25rem; font-family: Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 500; }
     .calendar-head p { margin: 0; color: var(--muted); font-size: .93rem; }
-    .legend { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: flex-end; color: var(--muted); font-size: .75rem; }
-    .legend span { display: inline-flex; align-items: center; gap: .35rem; }
-    .dot { width: .55rem; height: .55rem; border-radius: 50%; background: #d6cdbd; }
-    .dot.open { background: var(--cranberry); }
-    .dot.today { background: var(--gold); box-shadow: 0 0 0 3px rgb(230 189 98 / 28%); }
 
     .calendar-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; }
     .door {
@@ -136,31 +120,28 @@
       text-align: left;
       cursor: pointer;
       isolation: isolate;
-      transition: transform .2s ease, box-shadow .2s ease;
+      transition: transform .15s ease;
     }
-    .door:hover:not(.locked) { transform: translateY(-4px) rotate(-.5deg); box-shadow: 0 10px 20px rgb(47 37 22 / 16%); }
+    .door:hover:not(.locked) { transform: translateY(-3px); }
     .door::before { position: absolute; inset: 7px; z-index: -1; border: 1px dashed rgb(255 255 255 / 22%); border-radius: .65rem; content: ""; }
-    .door::after { position: absolute; right: -.8rem; bottom: -.9rem; z-index: -2; width: 4.8rem; height: 4.8rem; border-radius: 50%; background: rgb(255 255 255 / 7%); content: ""; }
     .door:nth-child(6n+1) { --door-bg: #8f2932; }
     .door:nth-child(6n+2) { --door-bg: #315d50; }
     .door:nth-child(6n+3) { --door-bg: #b08739; }
     .door:nth-child(6n+4) { --door-bg: #40506c; }
     .door:nth-child(6n+5) { --door-bg: #b04c3e; }
     .door:nth-child(6n) { --door-bg: #477268; }
-    .door .number { display: block; font-family: Georgia, serif; font-size: clamp(2rem, 6vw, 3.15rem); line-height: 1; }
-    .door .date { display: block; margin-top: .35rem; font-size: .69rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; opacity: .75; }
-    .door .status { position: absolute; right: .7rem; top: .65rem; display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: rgb(0 0 0 / 17%); font-size: .76rem; }
-    .door.locked { color: #9d9b92; background: #ded7c9; cursor: not-allowed; }
+    .door .number { display: block; font-family: Georgia, serif; font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1; }
+    .door .status { position: absolute; right: .75rem; top: .7rem; display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: rgb(0 0 0 / 20%); font-size: .8rem; font-weight: 800; }
+    .door .status svg { width: .8rem; height: .8rem; fill: currentColor; }
+    .door.locked { color: #6f6b60; background: #ded7c9; cursor: not-allowed; }
     .door.locked::before { border-color: rgb(45 55 50 / 12%); }
-    .door.locked .status { color: #6f756f; background: rgb(255 255 255 / 42%); }
+    .door.locked .status { color: #6f6b60; background: transparent; }
     .door.is-today { box-shadow: 0 0 0 4px var(--gold), 0 10px 26px rgb(131 93 29 / 24%); }
     .door.is-today::before { border-style: solid; border-color: var(--gold-light); }
-    .today-tag { position: absolute; right: .6rem; bottom: .55rem; padding: .25rem .45rem; border-radius: .35rem; color: var(--pine-deep); background: var(--gold-light); font-size: .63rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+    .today-tag { position: absolute; right: .6rem; bottom: .55rem; padding: .2rem .5rem; border-radius: .35rem; color: var(--pine-deep); background: var(--gold-light); font-size: .8rem; font-weight: 800; }
     .door.special { grid-column: span 3; min-height: 9rem; color: var(--pine-deep); background: linear-gradient(120deg, #f8d981, #fff0ba 42%, #d8a541); box-shadow: inset 0 0 0 1px rgb(117 69 8 / 20%); }
     .door.special::before { border-color: rgb(116 66 7 / 25%); }
-    .door.special::after { width: 9rem; height: 9rem; background: rgb(255 255 255 / 20%); }
     .door.special .number { font-size: clamp(3rem, 11vw, 5.5rem); }
-    .door.special .date { color: #705520; }
     .door.special .special-copy { position: absolute; right: 1.1rem; bottom: 1.2rem; max-width: 10rem; font-family: Georgia, serif; font-size: 1.05rem; text-align: right; }
     .door.special.is-today .special-copy { bottom: 2.6rem; }
     .door.special.locked { color: #6f6346; filter: saturate(.55); }
@@ -171,16 +152,15 @@
     dialog::backdrop { background: rgb(4 24 20 / 70%); backdrop-filter: blur(5px); }
     .modal-art { position: relative; min-height: 8.5rem; padding: 1.3rem 1.4rem; overflow: hidden; color: white; background: linear-gradient(135deg, var(--cranberry-dark), var(--cranberry)); }
     .modal-art.gold { color: var(--pine-deep); background: linear-gradient(135deg, #e5b84e, #ffe7a4); }
-    .modal-art::after { position: absolute; right: -2rem; top: -3rem; width: 12rem; height: 12rem; border: 1px solid rgb(255 255 255 / 23%); border-radius: 50%; box-shadow: 0 0 0 1.8rem rgb(255 255 255 / 5%), 0 0 0 3.6rem rgb(255 255 255 / 5%); content: ""; }
     .modal-number { position: relative; z-index: 1; font-family: Georgia, serif; font-size: 4.6rem; line-height: 1; }
-    .modal-label { position: relative; z-index: 1; display: block; margin-top: .25rem; font-size: .73rem; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; opacity: .75; }
+    .modal-label { position: relative; z-index: 1; display: block; margin-top: .3rem; font-size: .95rem; font-weight: 700; opacity: .85; }
     .close-button { position: absolute; right: 1rem; top: 1rem; z-index: 4; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid rgb(255 255 255 / 38%); border-radius: 50%; color: inherit; background: rgb(255 255 255 / 14%); cursor: pointer; }
     .modal-body { padding: 1.6rem; }
-    .content-type { display: inline-block; margin-bottom: .7rem; color: var(--cranberry); font-size: .72rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .content-type { display: inline-block; margin-bottom: .5rem; color: var(--cranberry); font-size: .95rem; font-weight: 800; }
     .modal-body h3 { margin: 0 0 .8rem; font-family: Georgia, serif; font-size: clamp(1.65rem, 6vw, 2.3rem); font-weight: 500; line-height: 1.1; }
     .modal-body p { margin: 0; color: #4d5b55; font-size: 1.05rem; line-height: 1.65; }
     .modal-action { margin-top: 1.25rem; border: 0; border-radius: 999px; padding: .8rem 1rem; color: white; background: var(--pine); font-weight: 800; cursor: pointer; }
-    .answer { margin-top: 1rem !important; padding: 1rem; border-left: 4px solid var(--gold); border-radius: .35rem; background: var(--paper); font-weight: 750; }
+    .modal-body .answer { margin-top: 1rem; padding: 1rem; border-left: 4px solid var(--gold); border-radius: .35rem; background: var(--paper); font-weight: 750; }
     .hidden { display: none !important; }
     .locked-dialog .modal-art { color: var(--ink); background: #ded7c9; }
 
@@ -197,15 +177,15 @@
     }
     @media (max-width: 620px) {
       .topbar { align-items: flex-start; }
-      .brand { font-size: .82rem; }
+      .brand { font-size: 1.1rem; }
       .prototype-control { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 1rem; }
       .prototype-control span { grid-column: 1 / -1; text-align: center; }
       .prototype-control button { padding: .35rem .5rem; }
       .calendar-head { align-items: flex-start; flex-direction: column; }
-      .legend { justify-content: flex-start; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      .door:hover:not(.locked) { transform: none; }
     }
   </style>
 </head>
@@ -214,7 +194,7 @@
   <div class="snow" aria-hidden="true"></div>
   <div class="site-shell">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>JÓLAGLEÐI</span></div>
+      <div class="brand"><svg class="brand-mark" viewBox="0 0 17 17" aria-hidden="true" focusable="false"><path d="M8.5 0 l2.6 6 6.4.4 -5 4 1.6 6.2 -5.6-3.4 -5.6 3.4 1.6-6.2 -5-4 6.4-.4z"/></svg><span>Jólagleði</span></div>
       <div class="prototype-control" aria-label="Veldu sýnidag frumgerðar">
         <span>Frumgerð</span>
         <button type="button" data-demo-day="1" aria-pressed="false">1.</button>
@@ -227,7 +207,7 @@
       <section class="hero" aria-labelledby="page-title">
         <p class="eyebrow">Desember 2026</p>
         <h1 id="page-title">Opnum jólin<br>einn dag í einu</h1>
-        <p>Bak við hvern glugga bíður lítil jólastund fyrir starfsfólkið okkar — speki, gleði, gátur og góðar kveðjur.</p>
+        <p>Á bak við hvern glugga er eitthvað smátt fyrir starfsfólkið: gáta, málsháttur, lítil áskorun eða kveðja.</p>
         <button class="today-button" id="open-today" type="button">Opna glugga dagsins <span aria-hidden="true">→</span></button>
         <div class="landscape" aria-hidden="true">
         <svg class="village" viewBox="0 0 920 140" preserveAspectRatio="xMidYMax slice" focusable="false">
@@ -246,17 +226,12 @@
             <h2 id="calendar-title">Jóladagatalið</h2>
             <p id="calendar-subtitle">Sýnidagur: 18. desember</p>
           </div>
-          <div class="legend" aria-label="Skýringar">
-            <span><i class="dot open"></i> Tilbúinn</span>
-            <span><i class="dot today"></i> Í dag</span>
-            <span><i class="dot"></i> Læstur</span>
-          </div>
         </div>
         <div class="calendar-grid" id="calendar-grid"></div>
       </section>
     </main>
 
-    <footer class="footer">Sjónræn frumgerð • Efni og dagsetningar eru til sýnis</footer>
+    <footer class="footer">Frumgerð. Efnið er sýnishorn og dagurinn er valinn efst á síðunni.</footer>
   </div>
 
   <dialog id="day-dialog" aria-labelledby="dialog-title">
@@ -276,30 +251,30 @@
 
   <script>
     const content = [
-      { type: "Velkomin", title: "Desember er genginn í garð", copy: "Velkomin í 24 litlar jólastundir. Hér opnum við gleðina einn dag í einu — og byrjum á gömlu góðu: Margar hendur vinna létt verk." },
-      { type: "Fyndin speki", title: "Leyfileg desemberregla", copy: "Það sem ekki klárast fyrir jól getur stundum beðið þar til eftir smákökuna." },
+      { type: "Velkomin", title: "Desember er genginn í garð", copy: "Fyrsti glugginn af 24. Við byrjum á gömlum og góðum málshætti: Margar hendur vinna létt verk." },
+      { type: "Desemberspeki", title: "Leyfileg desemberregla", copy: "Það sem ekki klárast fyrir jól getur stundum beðið þar til eftir smákökuna." },
       { type: "Áskorun dagsins", title: "Lítið takk", copy: "Þakkaðu samstarfsfélaga fyrir eitthvað lítið sem gerði daginn þinn betri. Ein setning er nóg." },
-      { type: "Jólagáta", title: "Hvað felst bak við nálarnar?", copy: "Ég er með nálar en sauma ekki og fæ stundum stjörnu á kollinn. Hvað er ég?", action: "Sýna svar", answer: "Jólatré 🎄" },
+      { type: "Jólagáta", title: "Hvað felst bak við nálarnar?", copy: "Ég er með nálar en sauma ekki og fæ stundum stjörnu á kollinn. Hvað er ég?", action: "Sýna svar", answer: "Jólatré." },
       { type: "Lag dagsins", title: "Smá tónlist í daginn", copy: "Settu uppáhalds jólalagið þitt á og gefðu þér þrjár mínútur til að hlusta. Þú mátt alveg syngja með." },
-      { type: "Jólakveðja", title: "Hlýja úr húsinu", copy: "Gleðilegan desemberdag! Megi kaffið vera heitt, verkefnalistinn hóflegur og samveran góð." },
-      { type: "Gamanspá", title: "Spáin er björt", copy: "Við spáum því að þú finnir góða ástæðu fyrir auka kaffipásu í dag." },
-      { type: "Jólafróðleikur", title: "Vissir þú?", copy: "Jólakort urðu vinsæl á nítjándu öld. Í dag getur hlý kveðja verið jafn einföld og stutt skilaboð til samstarfsfélaga." },
-      { type: "Áskorun dagsins", title: "Tvær mínútur", copy: "Taktu tveggja mínútna pásu frá skjánum, teyðu úr þér og horfðu aðeins út um gluggann — eins og aðstæður leyfa." },
-      { type: "Lukkunúmer", title: "Númer dagsins er 17", copy: "Engin vísindi liggja að baki. Bara dálítið jólaskap og von um sérlega góðan dag." },
+      { type: "Jólakveðja", title: "Góðar óskir", copy: "Megi kaffið vera heitt í dag og verkefnalistinn hóflegur." },
+      { type: "Spá dagsins", title: "Spáin er björt", copy: "Við spáum því að þú finnir góða ástæðu fyrir auka kaffipásu í dag." },
+      { type: "Jólafróðleikur", title: "Fyrsta jólakortið", copy: "Fyrsta jólakortið sem var prentað til sölu kom út í London árið 1843. Hugmyndina átti Henry Cole, sem hafði ekki tíma til að skrifa öllum vinum sínum bréf fyrir jólin." },
+      { type: "Áskorun dagsins", title: "Tvær mínútur", copy: "Taktu tveggja mínútna pásu frá skjánum, teygðu úr þér og horfðu út um gluggann." },
+      { type: "Lukkunúmer", title: "Númer dagsins er 17", copy: "Engin vísindi liggja að baki, bara dálítið jólaskap." },
       { type: "Málsháttur", title: "Betra er seint en aldrei", copy: "Sérstaklega þegar kemur að því að segja takk, óska gleðilegra jóla eða taka síðustu smákökuna." },
-      { type: "Jólagáta", title: "Vafið en ekki sár", copy: "Ég er vafinn en er ekki sár, og fólk gleðst oft þegar það opnar mig. Hvað er ég?", action: "Sýna svar", answer: "Jólagjöf 🎁" },
-      { type: "Lag dagsins", title: "Þitt lag, þín stund", copy: "Veldu rólegt jólalag, settu heyrnartólin á og gefðu þér örstutta desemberpásu." },
-      { type: "Fyndin speki", title: "Nestisbokskenningin", copy: "Jólaskapið kemur ekki alltaf í tölvupósti. Stundum kemur það í nestisboxi." },
-      { type: "Gleðiboð", title: "Þú hefur unnið!", copy: "Vinningurinn er rétturinn til að hrósa sjálfri eða sjálfum þér fyrir vikuna. Notist helst strax." },
+      { type: "Jólagáta", title: "Vafið en ekki sár", copy: "Ég er vafinn en er ekki sár, og fólk gleðst oft þegar það opnar mig. Hvað er ég?", action: "Sýna svar", answer: "Jólagjöf." },
+      { type: "Lag dagsins", title: "Jólahjól eða Heims um ból?", copy: "Segðu einhverjum frá jólalaginu sem minnir þig mest á jólin heima, og hvers vegna." },
+      { type: "Desemberspeki", title: "Nestisboxkenningin", copy: "Jólaskapið kemur ekki alltaf í tölvupósti. Stundum kemur það í nestisboxi." },
+      { type: "Vinningur", title: "Þú vannst", copy: "Vinningurinn er réttur til að hrósa sjálfri eða sjálfum þér fyrir vikuna. Best að nota hann strax." },
       { type: "Áskorun dagsins", title: "Jólavenjan mín", copy: "Deildu góðri jólavenju með samstarfsfélaga ef þig langar. Það má líka bara hlusta." },
-      { type: "Jólafróðleikur", title: "Ljós í myrkrinu", copy: "Vetrarhátíðir víða um heim eiga það sameiginlegt að fagna birtu, samveru og von á dimmasta tíma ársins." },
-      { type: "Kveðja dagsins", title: "Hvar sem þú ert í dag", copy: "Þessi kveðja er til þín — hvort sem þú ert á skrifstofu, á vakt eða í fjarvinnu. Takk fyrir þitt framlag." },
-      { type: "Gamanspá", title: "Óvænt bros", copy: "Við sjáum fyrir okkur óvænt bros í dag. Þú gætir verið ástæðan." },
-      { type: "Jólagáta", title: "Ljós en ekki sól", copy: "Ég lýsi en er ekki sól, og bráðna en er ekki snjór. Hvað er ég?", action: "Sýna svar", answer: "Kerti 🕯️" },
-      { type: "Lag dagsins", title: "Róleg stund", copy: "Finndu lag sem hægir aðeins á tímanum. Þrjár mínútur geta breytt heilli eftirmiðdagsstund." },
-      { type: "Fyndin speki", title: "Notalegt slær fullkomið", copy: "Fullkomin jól eru góð hugmynd. Notaleg jól eru frábær framkvæmd." },
-      { type: "Þakklæti", title: "Eitt sem gekk vel", copy: "Hugsaðu um eitt sem gekk vel á árinu. Þú þarft ekki að segja neinum frá því — en mundu að gefa sjálfri eða sjálfum þér kredit." },
-      { type: "Aðfangadagur", title: "Gleðileg jól", copy: "Takk fyrir samveruna, hjálpsemina og allt sem þið hafið lagt af mörkum á árinu. Hvort sem þú ert í fríi eða á vakt óskum við þér góðrar og hlýrrar jólastundar. ✦" }
+      { type: "Jólafróðleikur", title: "Stysti dagurinn nálgast", copy: "Á vetrarsólstöðum 21. desember er sólin á lofti í rétt rúmar fjórar klukkustundir í Reykjavík. Eftir það fer daginn aftur að lengja, fyrst um nokkrar sekúndur á dag." },
+      { type: "Kveðja dagsins", title: "Hvar sem þú ert í dag", copy: "Á skrifstofunni, á vaktinni eða heima við eldhúsborðið: takk fyrir þitt framlag í ár." },
+      { type: "Spá dagsins", title: "Óvænt bros", copy: "Við sjáum fyrir okkur óvænt bros í dag. Þú gætir verið ástæðan." },
+      { type: "Jólagáta", title: "Ljós en ekki sól", copy: "Ég lýsi en er ekki sól, og bráðna en er ekki snjór. Hvað er ég?", action: "Sýna svar", answer: "Kerti." },
+      { type: "Lag dagsins", title: "Róleg stund", copy: "Finndu rólegt lag, settu heyrnartólin á og gerðu ekkert annað á meðan það spilar." },
+      { type: "Desemberspeki", title: "Notalegt frekar en fullkomið", copy: "Fullkomin jól eru góð hugmynd. Notaleg jól eru frábær framkvæmd." },
+      { type: "Þakklæti", title: "Eitt sem gekk vel", copy: "Hugsaðu um eitt sem gekk vel á árinu. Þú þarft ekki að segja neinum frá því, en þú mátt alveg vera ánægð eða ánægður með það." },
+      { type: "Aðfangadagur", title: "Gleðileg jól", copy: "Takk fyrir samveruna, hjálpsemina og allt sem þið hafið lagt af mörkum á árinu. Hvort sem þú ert í fríi eða á vakt óskum við þér gleðilegra jóla." }
     ];
 
     const grid = document.querySelector("#calendar-grid");
@@ -308,7 +283,8 @@
     const openToday = document.querySelector("#open-today");
     const demoButtons = [...document.querySelectorAll("[data-demo-day]")];
     let demoDay = 18;
-    let lastTrigger = null;
+    let lastDay = null;
+    const lockIcon = '<svg viewBox="0 0 16 16" focusable="false"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2h.5a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zm1.6 0h3.8V5a1.9 1.9 0 0 0-3.8 0z"/></svg>';
 
     function doorLabel(day, locked, opened) {
       if (locked) return `${day}. desember, læstur, opnast ${day}. desember`;
@@ -342,21 +318,20 @@
         button.dataset.day = day;
         button.setAttribute("aria-label", doorLabel(day, locked, opened.has(day)));
         button.innerHTML = `
-          <span class="status" aria-hidden="true">${locked ? "⌁" : opened.has(day) ? "✓" : "✦"}</span>
+          ${locked ? `<span class="status" aria-hidden="true">${lockIcon}</span>` : opened.has(day) ? '<span class="status" aria-hidden="true">✓</span>' : ""}
           <span class="number">${day}</span>
-          <span class="date">desember</span>
           ${day === demoDay ? '<span class="today-tag">Í dag</span>' : ""}
           ${day === 24 ? '<span class="special-copy">Sérstök jólakveðja á aðfangadag</span>' : ""}
         `;
-        button.addEventListener("click", () => openDoor(day, button));
+        button.addEventListener("click", () => openDoor(day));
         grid.append(button);
       });
     }
 
-    function openDoor(day, trigger) {
+    function openDoor(day) {
       const locked = day > demoDay;
       const item = content[day - 1];
-      lastTrigger = trigger;
+      lastDay = day;
       dialog.classList.toggle("locked-dialog", locked);
       document.querySelector("#modal-art").classList.toggle("gold", day === 24 && !locked);
       document.querySelector("#modal-number").textContent = day;
@@ -387,7 +362,8 @@
       const bounds = dialog.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
     });
-    dialog.addEventListener("close", () => { if (lastTrigger?.isConnected) lastTrigger.focus(); });
+    // Glugginn er teiknaður upp á nýtt þegar hann er opnaður, svo fókus fer á nýja hnappinn.
+    dialog.addEventListener("close", () => document.querySelector(`[data-day="${lastDay}"]`)?.focus());
     openToday.addEventListener("click", () => document.querySelector(`[data-day="${demoDay}"]`)?.click());
     demoButtons.forEach(button => button.addEventListener("click", () => { demoDay = Number(button.dataset.demoDay); renderCalendar(); }));
 
